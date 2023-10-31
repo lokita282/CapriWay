@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-^h%hcc7j%&vlamg(rl^a1jrtvi%s#*26jq8ih3lr67d*4%)8jd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['capriway.onrender.com']
+ALLOWED_HOSTS = ['capriway.onrender.com', '127.0.0.1']
 
 
 # Application definition
@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     "accounts",
     "marketplace",
     "rest_framework",
-    "rest_framework.authtoken"
+    "rest_framework.authtoken",
+    ## special
+    'corsheaders',
 ]
 
 
@@ -92,10 +94,20 @@ WSGI_APPLICATION = "CapriWay.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'CapriWay',
+        'CLIENT': {
+            'host' : "mongodb+srv://sarthakbhan:sarthak123@cluster0.n3eczkt.mongodb.net/?retryWrites=true&w=majority"
+        }
     }
 }
 
@@ -143,3 +155,8 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = False
