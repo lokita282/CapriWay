@@ -8,7 +8,7 @@ from .managers import CustomUserManager
 
 # Create your models here.
 
-class CustomUser(AbstractUser, models.Model):
+class CustomUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     role = models.CharField(_('role'), max_length=255)
 
