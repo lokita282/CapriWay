@@ -8,9 +8,9 @@ class desginerUploadSerializer(serializers.ModelSerializer):
         model = desginerUpload
         fields = '__all__'
 
-class ShopDesignsSerializer(serializers.ModelSerializer):
-    _image = Base64ImageField(required=False)
+# class ShopDesignsSerializer(serializers.ModelSerializer):
+#     _image = Base64ImageField(required=False)
 
-    class Meta:
-        model = ShopDesigns
-        fields = '__all__'
+#     class Meta:
+#         model = ShopDesigns
+#         fields = '__all__'

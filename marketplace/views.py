@@ -40,7 +40,7 @@ def desginerUpload_api(request):
         # print(type(data['_image']))
         # file = request.FILES['_image']
         # path = default_storage.save('heart_of_the_swarm.txt', ContentFile(file.read()))
-        data['_image'] = file
+        # data['_image'] = file
         serializer = desginerUploadSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
@@ -68,8 +68,9 @@ def desginerUpload_api(request):
 @permission_classes((permissions.AllowAny,))
 def ShopDesigns_api(request):
     if (request.method == 'GET'):
-        data = ShopDesigns.objects.all()
-        serializer = ShopDesignsSerializer(data, many=True)
+        data = desginerUpload.objects.filter(isSold=False)
+        print(data)
+        serializer = desginerUploadSerializer(data, many=True)
         json_data = JSONRenderer().render(serializer.data)
         return HttpResponse(json_data, content_type='application/json')
     

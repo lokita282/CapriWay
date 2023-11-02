@@ -17,14 +17,16 @@ class desginerUpload(models.Model):
     tags = models.JSONField(null=True, default=dict, blank=True)
     _image = models.BinaryField()
     uploaderEmail = models.CharField(max_length=255, blank=True)
-    isPremimum = models.BooleanField(default=False)
-
-class ShopDesigns(models.Model):
-    _id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, unique=True)
-    old_id = models.CharField(max_length=255)
-    title = models.CharField(max_length=200)
-    tags = models.JSONField(null=True, default=dict, blank=True)
-    _image = models.BinaryField()
-    uploaderEmail = models.CharField(max_length=255, blank=True)
-    isPremimum = models.BooleanField(default=False)
+    isPremium = models.BooleanField(default=False)
+    isApproved = models.BooleanField(default=False)
     isSold = models.BooleanField(default=False)
+
+# class ShopDesigns(models.Model):
+#     _id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, unique=True)
+#     old_id = models.CharField(max_length=255)
+#     title = models.CharField(max_length=200)
+#     tags = models.JSONField(null=True, default=dict, blank=True)
+#     _image = models.BinaryField()
+#     uploaderEmail = models.CharField(max_length=255, blank=True)
+#     isPremimum = models.BooleanField(default=False)
+#     isSold = models.BooleanField(default=False)
