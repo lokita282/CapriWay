@@ -8,27 +8,17 @@ import {
   Paper,
   Typography,
   Grid,
-  FormControl,
-  Radio,
-  RadioGroup,
-  FormLabel,
   FormControlLabel,
   TextField,
-  InputLabel,
-  Select,
-  MenuItem,
   Button,
   Box,
   CircularProgress,
   Checkbox,
 } from '@mui/material'
-import { uploadDesign } from '../../services/designerServices'
+import axios from 'axios'
 import Tags from './Tags'
 import successHandler from '../toasts/successHandler' 
 import errorHandler from '../toasts/errorHandler'
-// import cloudinary from 'cloudinary'
-
-// import ReCAPTCHA from 'react-google-recaptcha'
 
 const styles = {
   paperContainer: {
@@ -64,14 +54,6 @@ const styles = {
 }
 
 const AddUserForm = () => {
-  const [json, setJson] = useState({
-    title: '',
-    tags: {},
-    _image: '',
-    isPremium: false,
-    uploaderEmail: localStorage.getItem('capriwayUserEmail')
-  })
-  
 
   const [title, setTitle] = useState('')
   const [file, setFile] = useState('')
@@ -82,15 +64,8 @@ const AddUserForm = () => {
   const handleTags = (tagsFromChild) => {
     setTags(tagsFromChild)
     console.log(tags)
-    setJson({ ...json, 'tags': {'tags':tags} })
   }
 
-  const handleChange = (e) => {
-    const name = e.target.name
-    const value = e.target.value
-    setJson({ ...json, [name]: value })
-    console.log(json)
-  }
   const handleChangeTitle = (e) => {
     setTitle(e.target.value)
     console.log(e.target.value)
@@ -98,66 +73,44 @@ const AddUserForm = () => {
 
   const handleChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked)
-    setJson({ ...json, 'isPremium': checked })
-    console.log(json)
   }
 
   const handleSubmit = async () => {
     setLoad(true)
-    // await uploadDesign(json)
-    //   .then((res) => {
-    //     console.log(json)
-    //     console.log('first')
-    //     console.log(res.data)
-    //     successHandler(res.data.message)
-    //     setLoad(false)
-    //   })
-    //   .catch((e) => {
-    //     errorHandler('Create user failed')
-    //     setLoad(false)
-    //   })
-    // console.log()
-    var myHeaders = new Headers()
-    myHeaders.append(
-      'Authorization',
-      `Bearer ${localStorage.getItem('capriwayToken')}`
-    )
-    // myHeaders.append('content-type', 'multipart/form-data')
 
-    var formdata = new FormData()
+    const formdata = new FormData()
+    formdata.append('_image', file)
     formdata.append('title', title)
-    formdata.append(
-      'tags',
-      JSON.stringify({'tags': {'tags':tags}})
-    )
+    formdata.append('tags', JSON.stringify({ tags: { tags: tags } }))
     formdata.append('uploaderEmail', localStorage.getItem('capriwayUserEmail').replace(/['"]+/g, ''))
     formdata.append('isPremium', checked)
-    formdata.append('_image', file, '[PROXY]')
 
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: formdata,
-      redirect: 'follow',
-    }
-
-    fetch(
-      'https://ea41-2405-201-6-41fd-e848-6f36-256a-b3e.ngrok-free.app/marketplace/upload-design/',
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => {
-        console.log(result)
+    axios
+      .post(
+        'https://ea41-2405-201-6-41fd-e848-6f36-256a-b3e.ngrok-free.app/marketplace/upload-design/',
+        formdata,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log('Upload successful', response.data)
         successHandler('Design uploaded successfully!')
         setLoad(false)
-      })
-      .catch((error) => console.log('error', error))
+      }).catch((error) => {
+        console.log('error', error)
+        errorHandler('Design upload failed')
+        setLoad(false)
+      })      
   }
 
     const handleUpload = (e) => {
-      console.log(e.target.files)
+      console.log(e.target.files[0])
       setFile(e.target.files[0])
-    }
+     }
 
   return (
     <Grid
@@ -179,8 +132,6 @@ const AddUserForm = () => {
               name="title"
               variant="outlined"
               fullWidth
-              // value={json.title}
-              // onChange={handleChange}
               onChange={handleChangeTitle}
             />
           </Grid>
@@ -191,7 +142,6 @@ const AddUserForm = () => {
           <Grid item xs={6} sx={{ paddingBottom: '20px' }}>
             <TextField
               id="file"
-              // value={}
               onChange={handleUpload}
               type="file"
             />

@@ -1,5 +1,5 @@
-import { Cancel, Tag } from '@mui/icons-material'
-import { FormControl, Stack, TextField, Typography } from '@mui/material'
+import { Cancel } from '@mui/icons-material'
+import { Stack, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useRef, useState } from 'react'
 
@@ -43,7 +43,6 @@ export default function InputTags({handleTags}) {
     SetTags([...tags, tagRef.current.value])
     handleTags([...tags, tagRef.current.value])
     tagRef.current.value = ''
-    // console.log(tags)
   }
   
   return (

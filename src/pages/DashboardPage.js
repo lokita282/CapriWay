@@ -7,10 +7,10 @@ import StoreDashboardPage from './StoreDashboardPage'
 
 export default function DashboardPage() {
   const { user } = useContext(capriwaycontext)
-  const isAdmin =
-    JSON.parse(localStorage.getItem('capriwayUser')) === 'admin' ? true : false
-   const isDesigner =
-    JSON.parse(localStorage.getItem('capriwayUser')) === 'designer' ? true : false
+
+  const isAdmin = JSON.parse(localStorage.getItem('capriwayUser')) === 'admin' ? true : false
+  const isDesigner = JSON.parse(localStorage.getItem('capriwayUser')) === 'designer' ? true : false
+  
   return (
     <SideDrawer>
       {isAdmin ? (

@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react'
-import SideDrawer from '../../components/sidebar/Sidebar'
 import { viewAllDesigns } from '../../services/storeServices'
 import {
   Card,
@@ -20,14 +19,8 @@ const PostedDesigns = () => {
     const func = async () => {
       try {
         await viewAllDesigns().then((res) => {
-          // res.data.tags.tags.tags.pop()
           console.log(res.data.tags)
           setDesigns(res.data)
-          console.log(designs)
-          // designs.map((design) => {
-          //   // console.log()
-          //   design.tags.tags.tags.pop()
-          // })
         })
       } catch (error) {
         console.log(error)
@@ -80,7 +73,6 @@ const PostedDesigns = () => {
                             )}
                           </Grid>
                         </Grid>
-                        {/* </Typography> */}
                       </CardContent>
                       <CardActions>
                         <Grid xs={8}> </Grid>

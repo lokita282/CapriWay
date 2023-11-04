@@ -47,8 +47,6 @@ const styles = {
   paperContainerCharts: {
     height: '500px',
     borderRadius: '10px',
-    // display: 'flex',
-    // flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'left',
@@ -70,14 +68,6 @@ const styles = {
 }
 
 const AdminDashboardPage = () => {
-  // const defaultOptions = {
-  //   loop: true,
-  //   autoplay: true,
-  //   animationData: userscan,
-  //   rendererSettings: {
-  //     preserveAspectRatio: 'xMidYMid slice',
-  //   },
-  // }
   return (
     <Grid container spacing={2} sx={{ height: '80vh', padding: '0', margin: '0' }}>
       <Grid item xs={12} md={5} sx={df_jfs_ac_fdc}>

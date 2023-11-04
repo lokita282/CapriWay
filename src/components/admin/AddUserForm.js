@@ -4,18 +4,12 @@ import {
   circularprog,
   df_jc_ac,
 } from '../../theme/CssMy'
-
 import {
   Paper,
   Typography,
   Grid,
   FormControl,
-  Radio,
-  RadioGroup,
-  FormLabel,
-  FormControlLabel,
   TextField,
-  InputLabel,
   Select,
   MenuItem,
   Button,
@@ -25,7 +19,6 @@ import {
 import { addUser } from '../../services/adminServices'
 import successHandler from '../toasts/successHandler' 
 import errorHandler from '../toasts/errorHandler'
-// import ReCAPTCHA from 'react-google-recaptcha'
 
 const styles = {
   paperContainer: {
@@ -193,10 +186,6 @@ const AddUserForm = () => {
             </FormControl>
           </Grid>
           <Grid item xs={12} sx={{ display: 'flex' }}>
-            {/* <ReCAPTCHA
-              sitekey="6LeuTKImAAAAAHGzGmP26m4V8IAO55NVL-Pc4EoO"
-              onChange={onChangeCaptcha}
-            /> */}
           </Grid>
           <Grid item xs={6}></Grid>
           <Grid

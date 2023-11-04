@@ -5,11 +5,7 @@ import img0 from '../images/img1.png'
 import img1 from '../images/img2.png'
 import img2 from '../images/img3.png'
 import img3 from '../images/img4.png'
-// import { createMuiTheme } from "@material-ui/core"
 import Login from '../components/auth/Login'
-
-// const defaultTheme = createMuiTheme()
-// const { breakpoints, typography: { pxToRem } } = defaultTheme
 
 function LoginPage() {
 
