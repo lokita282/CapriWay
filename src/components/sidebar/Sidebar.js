@@ -122,8 +122,8 @@ export default function SideDrawer(props) {
           <Button
             sx={btn}
             onClick={() => {
-              localStorage.setItem('codivasUser', null)
-              localStorage.setItem('codivasToken', null)
+              localStorage.setItem('capriwayUser', null)
+              localStorage.setItem('capriwayToken', null)
               navigate('/login')
             }}
           >

@@ -12,14 +12,9 @@ const PostedDesigns = () => {
     const func = async () => {
       try {
         await postedDesigns().then((res) => {
-          // res.data.tags.tags.tags.pop()
           console.log(res.data.tags)
           setDesigns(res.data)
           console.log(designs)
-          // designs.map((design) => {
-          //   // console.log()
-          //   design.tags.tags.tags.pop()
-          // })
         })
       } catch (error) {
         console.log(error)
@@ -46,7 +41,6 @@ const PostedDesigns = () => {
                       <Typography gutterBottom variant="h5" component="div">
                         {design.title}
                       </Typography>
-                      {/* <Typography variant="body2" color="text.secondary"> */}
                       <Grid container spacing={2}>
                         <Grid item xs={10.5}>
                           {design.tags.tags.tags
@@ -74,12 +68,9 @@ const PostedDesigns = () => {
                           )}
                         </Grid>
                       </Grid>
-                      {/* {console.log('jikcfj akcCM V')}
-                        {console.log(design.tags.tags.tags)} */}
-                      {/* </Typography> */}
                     </CardContent>
                     <CardActions>
-                      <Grid xs={8}> </Grid>
+                      {/* <Grid xs={8}> </Grid>
                       <Grid xs={4}>
                         <Button
                           sx={{ float: 'right', marginRight: '0.4em' }}
@@ -87,7 +78,7 @@ const PostedDesigns = () => {
                         >
                           Buy
                         </Button>
-                      </Grid>
+                      </Grid> */}
                     </CardActions>
                   </Card>
                 </Grid>

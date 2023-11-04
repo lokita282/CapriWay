@@ -18,8 +18,8 @@ function App() {
   }
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('codivasUser')))
-    setToken(localStorage.getItem('codivasToken'))
+    setUser(JSON.parse(localStorage.getItem('capriwayUser')))
+    setToken(localStorage.getItem('capriwayToken'))
   }, [])
 
   return (

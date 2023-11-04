@@ -142,7 +142,7 @@ const AddUserForm = () => {
     }
 
     fetch(
-      'https://ef34-2405-201-6-41fd-14b-fd60-18e6-5905.ngrok-free.app/marketplace/upload-design/',
+      'https://ea41-2405-201-6-41fd-e848-6f36-256a-b3e.ngrok-free.app/marketplace/upload-design/',
       requestOptions
     )
       .then((response) => response.text())
@@ -150,7 +150,7 @@ const AddUserForm = () => {
         console.log(result)
         successHandler('Design uploaded successfully!')
         setLoad(false)
-    })
+      })
       .catch((error) => console.log('error', error))
   }
 

@@ -14,33 +14,35 @@ export default function MainRouter() {
             <Outlet />
         </> : <>
             {
-                JSON.parse(localStorage.getItem("codivasUser")) === null && <Navigate to="/login" />
+                JSON.parse(localStorage.getItem("capriwayUser")) === null && <Navigate to="/login" />
             }
         </>
     }
 
     useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem("codivasUser")))
+        setUser(JSON.parse(localStorage.getItem('capriwayUser')))
     }, [])
 
     return (
       <>
         <Routes>
           <Route exact path="/login" element={<LoginPage />} />
-          <Route exact path="/" element={<DashboardPage />} />
 
-          {/* <Route path="/admin/addusers" element={<PrivateRouter />}> */}
-          <Route exact path="/addusers" element={<AddUsers />} />
-          {/* </Route> */}
-
-          <Route exact path="/approvedesign" element={<ApproveDesign />} />
-
-          <Route exact path="/posteddesigns" element={<PostedDesigns />} />
-
-          {/* <Route path="/" element={<PrivateRouter />}>
+          <Route path="/" element={<PrivateRouter />}>
             <Route exact path="/" element={<DashboardPage />} />
-          </Route> */}
+          </Route>
 
+          <Route path="/addusers" element={<PrivateRouter />}>
+            <Route exact path="/addusers" element={<AddUsers />} />
+          </Route>
+
+          <Route path="/approvedesign" element={<PrivateRouter />}>
+            <Route exact path="/approvedesign" element={<ApproveDesign />} />
+          </Route>
+
+          <Route path="/posteddesigns" element={<PrivateRouter />}>
+            <Route exact path="/posteddesigns" element={<PostedDesigns />} />
+          </Route>
         </Routes>
       </>
     )
