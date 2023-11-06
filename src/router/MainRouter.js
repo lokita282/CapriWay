@@ -4,7 +4,9 @@ import { capriwaycontext } from '../context/MainContext';
 import LoginPage from '../pages/LoginPage';
 import DashboardPage from '../pages/DashboardPage';
 import AddUsers from '../pages/Admin/AddUsers';
+import ViewOneDesign from '../pages/Admin/ViewOneDesign'
 import ApproveDesign from '../pages/Admin/ApproveDesign';
+import ManagePayments from '../pages/Admin/ManagePayments';
 import PostedDesigns from '../pages/Designer/PostedDesigns';
 
 export default function MainRouter() {
@@ -32,12 +34,20 @@ export default function MainRouter() {
             <Route exact path="/" element={<DashboardPage />} />
           </Route>
 
+          <Route path="/design/:id" element={<PrivateRouter />}>
+            <Route exact path="/design/:id" element={<ViewOneDesign />} />
+          </Route>
+
           <Route path="/addusers" element={<PrivateRouter />}>
             <Route exact path="/addusers" element={<AddUsers />} />
           </Route>
 
           <Route path="/approvedesign" element={<PrivateRouter />}>
             <Route exact path="/approvedesign" element={<ApproveDesign />} />
+          </Route>
+
+          <Route path="/managepayments" element={<PrivateRouter />}>
+            <Route exact path="/managepayments" element={<ManagePayments />} />
           </Route>
 
           <Route path="/posteddesigns" element={<PrivateRouter />}>

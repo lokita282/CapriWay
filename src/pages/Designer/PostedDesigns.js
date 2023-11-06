@@ -2,11 +2,16 @@ import {React, useState, useEffect} from 'react'
 import SideDrawer from '../../components/sidebar/Sidebar'
 import {postedDesigns} from '../../services/designerServices'
 import { Icon } from '@iconify/react'
-import { Card, CardMedia, CardContent, Typography, CardActions, Button, Grid, Chip } from '@mui/material'
+import { Card, CardMedia, CardContent, Typography, CardActions, Grid, Chip, InputAdornment, TextField, Box } from '@mui/material'
+import Fuse from 'fuzzy-search'
+import { df_jc_ac, textField } from '../../theme/CssMy'
+
+const columns = ['title', 'tags']
 
 const PostedDesigns = () => {
-
+  const [searchTerm, setSearchTerm] = useState('')
   const [designs, setDesigns] = useState()
+  const [filteredData, setFilteredData] = useState([])
 
   useEffect(() => {
     const func = async () => {
@@ -14,6 +19,7 @@ const PostedDesigns = () => {
         await postedDesigns().then((res) => {
           console.log(res.data.tags)
           setDesigns(res.data)
+          setFilteredData(res.data)
           console.log(designs)
         })
       } catch (error) {
@@ -24,10 +30,105 @@ const PostedDesigns = () => {
     func()
   }, [])
 
+  const handleSearch = (event) => {
+    const { value } = event.target
+    setSearchTerm(value)
+
+    if (value === '') {
+      setFilteredData(designs)
+    } else {
+      const fuse = new Fuse(designs, ['title', 'tags'], {
+        caseSensitive: false,
+      })
+      const results = fuse.search(value)
+      setFilteredData(results)
+    }
+  }
+
   return (
     <SideDrawer>
       <Grid container spacing={2}>
-      {designs ? designs.map((design) => {
+        {filteredData.length ? (
+          <>
+          <Grid item xs={12}>
+            <Box sx={{ padding: '2% 20%' }}>
+              <TextField
+                value={searchTerm}
+                sx={textField}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Icon icon="ic:round-search" width={22} height={22} />
+                    </InputAdornment>
+                  ),
+                }}
+                placeholder="Search schemes"
+                onChange={handleSearch}
+              />
+            </Box>
+            </Grid> 
+            {designs
+              ? designs.map((design) => {
+                  return (
+                    <>
+                      <Grid item xs={4}>
+                        <Card sx={{ maxWidth: 345 }}>
+                          <CardMedia
+                            sx={{ height: 140 }}
+                            image="/static/images/cards/contemplative-reptile.jpg"
+                            title="green iguana"
+                          />
+                          <CardContent>
+                            <Typography
+                              gutterBottom
+                              variant="h5"
+                              component="div"
+                            >
+                              {design.title}
+                            </Typography>
+                            <Grid container spacing={2}>
+                              <Grid item xs={10.5}>
+                                {design.tags.tags.tags
+                                  ? design.tags.tags.tags.map((tag) => {
+                                      return (
+                                        <Chip
+                                          label={tag}
+                                          sx={{ marginRight: '1em' }}
+                                        />
+                                      )
+                                    })
+                                  : 'Loading...'}
+                              </Grid>
+                              <Grid item xs={1.5}>
+                                {design.isPremium === true ? (
+                                  <Icon
+                                    icon="fa6-solid:crown"
+                                    color="#FCEA2B"
+                                    width="26"
+                                    height="26"
+                                    style={{
+                                      stroke: 'black',
+                                      strokeWidth: '5',
+                                    }}
+                                  />
+                                ) : (
+                                  ''
+                                )}
+                              </Grid>
+                            </Grid>
+                          </CardContent>
+                          <CardActions></CardActions>
+                        </Card>
+                      </Grid>
+                    </>
+                  )
+                })
+              : 'Loading...'}
+          </>
+        ) : (
+          <Box sx={{ ...df_jc_ac, height: '80vh' }}>{/* <Loading /> */}</Box>
+        )}
+        {/* {designs ? designs.map((design) => {
             return (
               <>
                 <Grid item xs={4}>
@@ -70,22 +171,13 @@ const PostedDesigns = () => {
                       </Grid>
                     </CardContent>
                     <CardActions>
-                      {/* <Grid xs={8}> </Grid>
-                      <Grid xs={4}>
-                        <Button
-                          sx={{ float: 'right', marginRight: '0.4em' }}
-                          variant="contained"
-                        >
-                          Buy
-                        </Button>
-                      </Grid> */}
                     </CardActions>
                   </Card>
                 </Grid>
               </>
             )
-          }): ('Loading...')}
-    </Grid>
+          }): ('Loading...')} */}
+      </Grid>
     </SideDrawer>
   )
 }

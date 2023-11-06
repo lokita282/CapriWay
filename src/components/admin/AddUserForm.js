@@ -11,6 +11,10 @@ import {
   FormControl,
   TextField,
   Select,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  FormLabel,
   MenuItem,
   Button,
   Box,
@@ -58,14 +62,18 @@ const AddUserForm = () => {
     first_name: '',
     last_name: '',
     email: '',
-    username: '',
     password: '',
-    role: '',
+    phone_number: '',
+    city: '',
+    state: '',
+    country: '',
+    username: 'null',
+    role: 'designer',
     is_staff: true,
     is_active: true,
   })
 
-  const [role, setRole] = useState('')
+  const [role, setRole] = useState('designer')
   const [load, setLoad] = useState(false)
 
   const handleChangeRole = (event) => {
@@ -88,7 +96,7 @@ const AddUserForm = () => {
       .then((res) => {
         console.log('first')
         console.log(res.data)
-        successHandler('user created')
+        successHandler('User created!')
         setLoad(false)
       })
       .catch((e) => {
@@ -133,7 +141,7 @@ const AddUserForm = () => {
               fullWidth
             />
           </Grid>
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}>
             <TextField
               id="username"
               placeholder="Username"
@@ -143,7 +151,7 @@ const AddUserForm = () => {
               onChange={handleChange}
               fullWidth
             />
-          </Grid>
+          </Grid> */}
           <Grid item xs={6}>
             <TextField
               id="email"
@@ -167,6 +175,50 @@ const AddUserForm = () => {
             />
           </Grid>
           <Grid item xs={6}>
+            <TextField
+              id="phone_number"
+              placeholder="Phone Number"
+              name="phone_number"
+              variant="outlined"
+              value={json.phone_number}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="city"
+              placeholder="City"
+              name="city"
+              variant="outlined"
+              value={json.city}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="state"
+              placeholder="State"
+              name="state"
+              variant="outlined"
+              value={json.state}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="country"
+              placeholder="Country"
+              name="country"
+              variant="outlined"
+              value={json.country}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+          {/* <Grid item xs={6}>
             <FormControl fullWidth>
               <Select
                 labelId="demo-simple-select-label"
@@ -179,14 +231,55 @@ const AddUserForm = () => {
                 onChange={handleChangeRole}
               >
                 <MenuItem value="">Role</MenuItem>
-                {/* <MenuItem value="admin">Admin</MenuItem> */}
                 <MenuItem value="designer">Designer</MenuItem>
                 <MenuItem value="store">Store</MenuItem>
               </Select>
             </FormControl>
+          </Grid> */}
+          <Grid item xs={3.5}>
+            <FormControl>
+              <FormLabel id="demo-controlled-radio-buttons-group">
+                Role:
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-controlled-radio-buttons-group"
+                name="controlled-radio-buttons-group"
+                value={role}
+                onChange={handleChangeRole}
+                defaultChecked
+                sx={{ display: 'flex', flexDirection: 'row' }}
+              >
+                <FormControlLabel
+                  value="designer"
+                  name="role"
+                  control={<Radio />}
+                  label="Designer"
+                />
+                <FormControlLabel
+                  value="store"
+                  name="role"
+                  control={<Radio />}
+                  label="Normal User"
+                />
+              </RadioGroup>
+            </FormControl>
           </Grid>
-          <Grid item xs={12} sx={{ display: 'flex' }}>
+          <Grid item xs={6}>
+            {role === 'store' ? (
+              <TextField
+                id="storeName"
+                placeholder="Store Name"
+                name="storeName"
+                value={json.storeName}
+                onChange={handleChange}
+                variant="outlined"
+                fullWidth
+              />
+            ) : (
+              ''
+            )}
           </Grid>
+          <Grid item xs={12} sx={{ display: 'flex' }}></Grid>
           <Grid item xs={6}></Grid>
           <Grid
             item

@@ -1,12 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import gipphy from '../images/dangerGif.svg'
-import giphy from '../images/giphy.gif'
-import { df_jfs_ac_fdc } from '../theme/CssMy'
+import {React, useState} from 'react'
+import { styled } from '@mui/material/styles'
+import {Grid, Typography, Card, CardHeader, Avatar, CardMedia, CardContent, CardActions, Button, Box, CardActionArea} from '@mui/material'
+import IconButton, { IconButtonProps } from '@mui/material/IconButton'
+import { red } from '@mui/material/colors'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import { useNavigate } from 'react-router'
+import { Icon } from '@iconify/react'
+import ShareIcon from '@mui/icons-material/Share'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 const styles = {
   paperContainer: {
@@ -67,64 +69,127 @@ const styles = {
   },
 }
 
-const AdminDashboardPage = () => {
+interface ExpandMoreProps extends IconButtonProps {
+  expand: boolean;
+}
+
+const Btn = ({ display, id }) => {
+  const navigate = useNavigate()
   return (
-    <Grid container spacing={2} sx={{ height: '80vh', padding: '0', margin: '0' }}>
-      <Grid item xs={12} md={5} sx={df_jfs_ac_fdc}>
-        <Paper style={styles.paperContainer} elevation={0}>
-          <Typography variant="h2" style={styles.gradientText}>
-            <b>Scan. Verify. Redeem.</b>
-          </Typography>
-          <Link style={{...styles.payBtn, width:'auto'}} to="">
-            <Button sx={{ color: '#fff', fontFamily: 'Poppins', width:'auto' }}>
-              <b>Get Started ➤</b>
-            </Button>
-          </Link>
-        </Paper>
-      </Grid>
-      <Grid item xs={0} md={7} sx={{ padding: '0', position: 'relative', margin: '0', display: 'flex', justifyContent: 'flex-end' }}>
-        <img style={{ marginTop: '-35px', height: '89vh' }} src={gipphy} />
-        <img src={giphy} style={{ position: 'absolute', top: '165px', left: '150px' }} />
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="h5" style={{ ...styles.gradientTextH2, marginTop: '10%' }}>
-          <b>Transaction Overview </b>
-        </Typography>
-      </Grid>
-      <Grid item xs={9}>
-        <Paper style={styles.paperContainerAnalysis}>
-          <Typography
-            variant="h6"
-            color="initial"
-            sx={{ fontFamily: 'Poppins' }}
-          >
-            <b>Weekly Activity</b>
-          </Typography>
-        </Paper>
-      </Grid>
-      <Grid item xs={3}>
-      </Grid>
-      <Grid item xs={9}>
-        <Paper style={styles.paperContainerAnalysis}>
-          <Typography
-            variant="h6"
-            color="initial"
-            sx={{ fontFamily: 'Poppins' }}
-          >
-            <b>Category vs Time Analysis</b>
-          </Typography>
-        </Paper>
-      </Grid>
-      <Grid item xs={3} sx={{ marginBottom: '10%' }}>
-        <Paper style={styles.paperContainerCharts}>
-          <Typography
-            variant="h6"
-            color="initial"
-            sx={{ padding: 5, paddingBottom: 2, fontFamily: 'Poppins' }}
-          >
-            <b>Comparing Expenditure</b>
-          </Typography>
-        </Paper>
+    <div className={display}>
+      <Button
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+        variant="contained"
+        onClick={() => {navigate(`/design/${id}`)}}
+      >
+        View
+      </Button>
+    </div>
+  )
+}
+
+const ExpandMore = styled((props: ExpandMoreProps) => {
+  const { expand, ...other } = props
+  return <IconButton {...other} />
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}))
+
+
+const AdminDashboardPage = () => {
+  const [expanded, setExpanded] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+  const [display, setDisplay] = useState('notdisplayed')
+
+
+  const handleMouseOver = () => {
+    console.log('in')
+    setIsHovered(true)
+  }
+
+  const handleMouseOut = () => {
+    setIsHovered(false)
+  }
+
+  return (
+    <Grid
+      container
+      spacing={2}
+      sx={{ height: '80vh', padding: '0', margin: '0' }}
+    >
+      <Grid item xs={4}>
+        <Card
+          sx={{ maxWidth: 345 }}
+          onMouseOver={handleMouseOver}
+          onMouseOut={handleMouseOut}
+        >
+          <CardHeader
+            avatar={
+              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                R
+              </Avatar>
+            }
+            title="Design a"
+            subheader="September 14, 2023"
+          />
+          <CardActionArea>
+            {isHovered ? (
+              <CardContent sx={{ minHeight: '220px' }}>
+                <Box ml={2}>
+                  <CardMedia
+                    component="img"
+                    height="194"
+                    image="/static/images/cards/design.jpg"
+                    alt="design a"
+                  />
+                </Box>
+                <CardActions>
+                  <Btn display={display} id={1}/>
+                  <IconButton aria-label="add to favorites">
+                    <FavoriteIcon />
+                  </IconButton>
+                  <Typography variant="body1" color="initial">
+                    233
+                  </Typography>
+                </CardActions>
+              </CardContent>
+            ) : (
+              <CardContent sx={{ minHeight: '220px' }}>
+                <Box ml={2}>
+                  <CardMedia
+                    component="img"
+                    height="194"
+                    image="/static/images/cards/paella.jpg"
+                    alt="design a "
+                  />
+                </Box>
+                <CardActions>
+                  <IconButton aria-label="add to favorites">
+                    <FavoriteIcon />
+                  </IconButton>
+                  <Typography variant="body1" color="initial">
+                    233
+                  </Typography>
+                </CardActions>
+              </CardContent>
+            )}
+          </CardActionArea>
+          {/* <CardActions disableSpacing>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            <Typography variant="body1" color="initial">233</Typography>
+          </CardActions> */}
+        </Card>
       </Grid>
     </Grid>
   )

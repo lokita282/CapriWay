@@ -129,10 +129,10 @@ export default function SideDrawer(props) {
                     <ListItemButton sx={listItemBtn}>
                       <ListItemIcon sx={listItemIco}>
                         <Icon
-                          icon="material-symbols:home-rounded"
+                          icon="mdi:brush"
                           color={url === '' ? '#375EC0' : '#6A707F'}
-                          width="26"
-                          height="26"
+                          width="30"
+                          height="30"
                         />
                       </ListItemIcon>
                     </ListItemButton>
@@ -150,7 +150,7 @@ export default function SideDrawer(props) {
                           color={
                             url.includes('addusers') ? '#375EC0' : '#6A707F'
                           }
-                          icon="mdi:account-multiple-plus"
+                          icon="mdi:account-multiple-outline"
                           width="28"
                           height="28"
                         />
@@ -173,6 +173,26 @@ export default function SideDrawer(props) {
                               : '#6A707F'
                           }
                           icon="mdi:tag-approve"
+                          width="24"
+                          height="24"
+                        />
+                      </ListItemIcon>
+                    </ListItemButton>
+                  </ListItem>
+                </Tooltip>
+                <Tooltip title="Manage Payments">
+                  <ListItem
+                    disablePadding
+                    onClick={() => navigate('/managepayments')}
+                    sx={{ display: 'block', marginTop: '20%' }}
+                  >
+                    <ListItemButton sx={listItemBtn}>
+                      <ListItemIcon sx={listItemIco}>
+                        <Icon
+                          color={
+                            url.includes('managepayments') ? '#375EC0' : '#6A707F'
+                          }
+                          icon="mdi:cash"
                           width="24"
                           height="24"
                         />
@@ -212,7 +232,11 @@ export default function SideDrawer(props) {
                       <ListItemIcon sx={listItemIco}>
                         <Icon
                           icon="material-symbols-light:grid-view"
-                          color={url.includes('posteddesigns')? '#375EC0' : '#6A707F'}
+                          color={
+                            url.includes('posteddesigns')
+                              ? '#375EC0'
+                              : '#6A707F'
+                          }
                           width="26"
                           height="26"
                         />
