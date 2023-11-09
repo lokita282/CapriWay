@@ -64,7 +64,6 @@ const AddUsers = () => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <DesignerUsersTable />
-        {/* <BulkVoucher /> */}
       </TabPanel>
       <AddUserForm />
     </SideDrawer>

@@ -11,11 +11,21 @@ import {
   ListItemIcon,
   ListItemButton,
   Grid,
+  Modal,
+  Box,
+  Button,
+  Typography
 } from '@mui/material'
 import TableCell, { tableCellClasses } from '@mui/material/TableCell'
 import { Icon } from '@iconify/react'
 import { useNavigate } from 'react-router'
-import { getDesignerUsers } from '../../services/adminServices'
+import { btn_bank, circularprog, df_jc_ac } from '../../theme/CssMy'
+import successHandler from '../toasts/successHandler'
+import errorHandler from '../toasts/errorHandler'
+import EditUser from './EditUser'
+import DeleteUser from './DeleteUser'
+import ViewUser from './ViewUser'
+import { getDesignerUsers, deleteUser } from '../../services/adminServices'
 
 const listItemBtn = {
   justifyContent: 'initial',
@@ -57,11 +67,30 @@ const columns = [
   },
 ]
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  // border: '2px solid #000',
+  // boxShadow: 24,
+  p: 4,
+  borderRadius: 5
+}
+
 export default function StickyHeadTable() {
   const [users, setUsers] = useState()
-  // const [rows, setRows] = useState()
+  const [userId, setUserId] = useState()
+  // const [userIdDelete, setUserIdDelete] = useState()
+  const [openEdit, setOpenEdit] = useState(false)
+  const [openDelete, setOpenDelete] = useState(false)
+  const [openView, setOpenView] = useState(false)
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [state, setState] = useState(false)
+  const [load, setLoad] = useState(false)
 
   const navigate = useNavigate()
 
@@ -73,6 +102,30 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value)
     setPage(0)
   }
+
+  const handleOpenEdit = () => {
+    console.log('OPEN')
+    console.log(userId)
+    setOpenEdit(true)
+  }
+
+  const handleOpenDelete = () => {
+    console.log('OPEN')
+    console.log(userId)
+    setOpenDelete(true)
+  }
+
+  const handleOpenView = () => {
+    console.log('OPEN')
+    console.log(userId)
+    setOpenView(true)
+  }
+
+  const handleCloseEdit = () => setOpenEdit(false)
+
+  const handleCloseDelete = () => setOpenDelete(false)
+
+  const handleCloseView = () => setOpenView(false)
 
   useEffect(() => {
     const func = async () => {
@@ -88,7 +141,7 @@ export default function StickyHeadTable() {
       }
     }
     func()
-  }, [])
+  }, [state])
 
   return (
     <Paper sx={{ width: '77%', overflow: 'hidden', margin: 'auto' }}>
@@ -118,7 +171,6 @@ export default function StickyHeadTable() {
               ).map((row) => {
                 return (
                   <StyledTableRow
-                    hover
                     role="checkbox"
                     tabIndex={-1}
                     key={row.code}
@@ -130,7 +182,15 @@ export default function StickyHeadTable() {
                     <StyledTableCell align="center">
                       <Grid container alignItems="center" spacing={0}>
                         <Grid item xs={4}>
-                          <ListItemButton sx={listItemBtn}>
+                          <ListItemButton
+                            sx={listItemBtn}
+                            onClick={() => {
+                              setUserId(row.id)
+                              console.log('edittttttttt')
+                              console.log(userId)
+                              handleOpenEdit()
+                            }}
+                          >
                             <ListItemIcon sx={listItemIco}>
                               <Icon
                                 color={'6A707F'}
@@ -142,7 +202,13 @@ export default function StickyHeadTable() {
                           </ListItemButton>
                         </Grid>
                         <Grid item xs={4}>
-                          <ListItemButton sx={listItemBtn}>
+                          <ListItemButton
+                            sx={listItemBtn}
+                            onClick={() => {
+                              setUserId(row.id)
+                              handleOpenDelete()
+                            }}
+                          >
                             <ListItemIcon sx={listItemIco}>
                               <Icon
                                 color={'6A707F'}
@@ -154,7 +220,13 @@ export default function StickyHeadTable() {
                           </ListItemButton>
                         </Grid>
                         <Grid item xs={4}>
-                          <ListItemButton sx={listItemBtn}>
+                          <ListItemButton
+                            sx={listItemBtn}
+                            onClick={() => {
+                              setUserId(row.id)
+                              handleOpenView()
+                            }}
+                          >
                             <ListItemIcon sx={listItemIco}>
                               <Icon
                                 color={'6A707F'}
@@ -189,6 +261,57 @@ export default function StickyHeadTable() {
       ) : (
         ''
       )}
+
+      {/* Edit User Modal */}
+      <Modal
+        open={openEdit}
+        onClose={handleCloseEdit}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <EditUser
+            userId={userId}
+            handleCloseEdit={handleCloseEdit}
+            state={state}
+            setState={setState}
+          />
+        </Box>
+      </Modal>
+
+      {/* Delete User Modal */}
+      <Modal
+        open={openDelete}
+        onClose={handleCloseDelete}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <DeleteUser
+            userId={userId}
+            handleCloseDelete={handleCloseDelete}
+            state={state}
+            setState={setState}
+          />
+        </Box>
+      </Modal>
+
+      {/* View User Modal */}
+      <Modal
+        open={openView}
+        onClose={handleCloseView}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <ViewUser
+            userId={userId}
+            handleCloseView={handleCloseView}
+            state={state}
+            setState={setState}
+          />
+        </Box>
+      </Modal>
     </Paper>
   )
 }

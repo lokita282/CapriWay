@@ -8,8 +8,34 @@ export const addUser = (data) => {
   })
 }
 
+export const editUser = (id, data) => {
+  return httpcommon.patch(`/user/${id}/`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
+export const getSingleUser = (id) => {
+  return httpcommon.get(`/user/${id}/`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
+export const deleteUser = (id) => {
+  console.log('from services')
+  console.log(id)
+  return httpcommon.delete(`/user/${id}/`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
 export const getNormalUsers = () => {
-  return httpcommon.get(`/accounts/view-store/`, {
+  return httpcommon.get(`/accounts/store/`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
     },
@@ -17,7 +43,7 @@ export const getNormalUsers = () => {
 }
 
 export const getDesignerUsers = () => {
-  return httpcommon.get(`/accounts/view-designers/`, {
+  return httpcommon.get(`/accounts/designers/`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
     },

@@ -87,7 +87,7 @@ const AddUserForm = () => {
 
     axios
       .post(
-        'https://ea41-2405-201-6-41fd-e848-6f36-256a-b3e.ngrok-free.app/marketplace/upload-design/',
+        'https://bfea-2402-3a80-75b-ed23-7dd3-ad5-34cb-547e.ngrok-free.app/marketplace/upload-design/',
         formdata,
         {
           headers: {
@@ -100,7 +100,8 @@ const AddUserForm = () => {
         console.log('Upload successful', response.data)
         successHandler('Design uploaded successfully!')
         setLoad(false)
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.log('error', error)
         errorHandler('Design upload failed')
         setLoad(false)
