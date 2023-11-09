@@ -13,19 +13,14 @@ import {
   Grid,
   Modal,
   Box,
-  Button,
-  Typography
 } from '@mui/material'
 import TableCell, { tableCellClasses } from '@mui/material/TableCell'
 import { Icon } from '@iconify/react'
 import { useNavigate } from 'react-router'
-import { btn_bank, circularprog, df_jc_ac } from '../../theme/CssMy'
-import successHandler from '../toasts/successHandler'
-import errorHandler from '../toasts/errorHandler'
 import EditUser from './EditUser'
 import DeleteUser from './DeleteUser'
 import ViewUser from './ViewUser'
-import { getDesignerUsers, deleteUser } from '../../services/adminServices'
+import { getDesignerUsers } from '../../services/adminServices'
 
 const listItemBtn = {
   justifyContent: 'initial',
@@ -83,16 +78,12 @@ const style = {
 export default function StickyHeadTable() {
   const [users, setUsers] = useState()
   const [userId, setUserId] = useState()
-  // const [userIdDelete, setUserIdDelete] = useState()
   const [openEdit, setOpenEdit] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
   const [openView, setOpenView] = useState(false)
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [state, setState] = useState(false)
-  const [load, setLoad] = useState(false)
-
-  const navigate = useNavigate()
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -133,7 +124,6 @@ export default function StickyHeadTable() {
         await getDesignerUsers().then((res) => {
           console.log(res.data.tags)
           setUsers(res.data)
-          //  setFilteredData(res.data)
           console.log(users)
         })
       } catch (error) {

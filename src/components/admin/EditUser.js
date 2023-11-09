@@ -202,6 +202,27 @@ const EditUser = ({ userId, handleCloseEdit, state, setState }) => {
               onChange={handleChange}
             />
           </Grid>
+          {user.role === 'store' ? (
+            <>
+              <Grid item xs={6}>
+                <Typography variant="body1" color="initial">
+                  Store Name:
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  id=""
+                  label=""
+                  defaultValue={user.storeName}
+                  name="storeName"
+                  // value={json.country}
+                  onChange={handleChange}
+                />
+              </Grid>
+            </>
+          ) : (
+            <></>
+          )}
 
           <Grid item xs={6}></Grid>
           <Grid item xs={6} align="right">

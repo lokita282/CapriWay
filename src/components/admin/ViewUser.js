@@ -88,6 +88,18 @@ const ViewUser = ({ userId, handleCloseView, state, setState }) => {
               Country: {user.country}
             </Grid>
 
+            {user.role === 'store' ? (
+              <>
+                <Grid item xs={6}>
+                  <Typography variant="body1" color="initial">
+                    Store Name: {user.storeName}
+                  </Typography>
+                </Grid>
+              </>
+            ) : (
+              <></>
+            )}
+
             <Grid item xs={6}></Grid>
             <Grid item xs={6} align="right">
               <Button
