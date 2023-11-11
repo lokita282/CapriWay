@@ -6,6 +6,8 @@ import DashboardPage from '../pages/DashboardPage';
 import AddUsers from '../pages/Admin/AddUsers';
 import ViewOneDesign from '../pages/Admin/ViewOneDesign'
 import ApproveDesign from '../pages/Admin/ApproveDesign';
+import DesignerUnapproved from '../pages/Admin/DesignerUnapproved'
+import ApproveSingleDesign from '../pages/Admin/ApproveSingleDesign'
 import ManagePayments from '../pages/Admin/ManagePayments';
 import PostedDesigns from '../pages/Designer/PostedDesigns';
 
@@ -44,6 +46,14 @@ export default function MainRouter() {
 
           <Route path="/approvedesign" element={<PrivateRouter />}>
             <Route exact path="/approvedesign" element={<ApproveDesign />} />
+          </Route>
+
+          <Route path="/designer-unapproved" element={<PrivateRouter />}>
+            <Route exact path="/designer-unapproved" element={<DesignerUnapproved />} />
+          </Route>
+
+          <Route path="/designer-unapproved/:id" element={<PrivateRouter />}>
+            <Route exact path="/designer-unapproved/:id" element={<ApproveSingleDesign />} />
           </Route>
 
           <Route path="/managepayments" element={<PrivateRouter />}>

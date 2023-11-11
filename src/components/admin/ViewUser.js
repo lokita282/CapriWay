@@ -39,9 +39,7 @@ const ViewUser = ({ userId, handleCloseView, state, setState }) => {
         console.log(error)
       }
     }
-    func()
-  
-    
+    func() 
   }, [])
   
 

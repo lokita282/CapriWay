@@ -67,7 +67,7 @@ const AddUserForm = () => {
     city: '',
     state: '',
     country: '',
-    username: 'null',
+    username: '',
     role: 'designer',
     is_staff: true,
     is_active: true,
@@ -91,7 +91,11 @@ const AddUserForm = () => {
   }
 
   const handleSubmit = async () => {
+    if (json.username === "") {
+      json.username = json.email
+    }
     setLoad(true)
+    console.log(json)
     await addUser(json)
       .then((res) => {
         console.log('first')

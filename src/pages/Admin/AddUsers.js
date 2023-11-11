@@ -58,6 +58,7 @@ const AddUsers = () => {
       >
         <Tab label="Normal Users" {...a11yProps(0)} />
         <Tab label="Designer Users" {...a11yProps(1)} />
+        <Tab label="Add User" {...a11yProps(2)} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <NormalUsersTable />
@@ -65,7 +66,9 @@ const AddUsers = () => {
       <TabPanel value={value} index={1}>
         <DesignerUsersTable />
       </TabPanel>
-      <AddUserForm />
+      <TabPanel value={value} index={2}>
+        <AddUserForm />
+      </TabPanel>
     </SideDrawer>
   )
 }

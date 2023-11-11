@@ -53,12 +53,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }))
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'Email', minWidth: 100 },
+  { id: 'name', label: 'Name', minWidth: 150 },
+  { id: 'email', label: 'Email', minWidth: 150 },
+  { id: 'storeName', label: 'Store Name', minWidth: 150 },
   {
-    id: 'size',
+    id: 'actions',
     label: '',
-    minWidth: 170,
+    minWidth: 150,
   },
 ]
 
@@ -163,6 +164,7 @@ export default function StickyHeadTable() {
                       {row.first_name} {row.last_name}
                     </StyledTableCell>
                     <StyledTableCell>{row.email}</StyledTableCell>
+                    <StyledTableCell>{row.storeName}</StyledTableCell>
                     <StyledTableCell align="center">
                       <Grid container alignItems="center" spacing={0}>
                         <Grid item xs={4}>

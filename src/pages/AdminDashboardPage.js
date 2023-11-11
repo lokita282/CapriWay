@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import { styled } from '@mui/material/styles'
 import {Grid, Typography, Card, CardHeader, Avatar, CardMedia, CardContent, CardActions, Button, Box, CardActionArea} from '@mui/material'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
@@ -9,6 +9,7 @@ import { Icon } from '@iconify/react'
 import ShareIcon from '@mui/icons-material/Share'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import {getAllDesigns} from '../services/adminServices'
 
 const styles = {
   paperContainer: {
@@ -69,9 +70,9 @@ const styles = {
   },
 }
 
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
+// interface ExpandMoreProps extends IconButtonProps {
+//   expand: boolean;
+// }
 
 const Btn = ({ display, id }) => {
   const navigate = useNavigate()
@@ -93,22 +94,24 @@ const Btn = ({ display, id }) => {
   )
 }
 
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props
-  return <IconButton {...other} />
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}))
+// const ExpandMore = styled((props: ExpandMoreProps) => {
+//   const { expand, ...other } = props
+//   return <IconButton {...other} />
+// })(({ theme, expand }) => ({
+//   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+//   marginLeft: 'auto',
+//   transition: theme.transitions.create('transform', {
+//     duration: theme.transitions.duration.shortest,
+//   }),
+// }))
 
 
 const AdminDashboardPage = () => {
   const [expanded, setExpanded] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [display, setDisplay] = useState('notdisplayed')
+
+  const [designs, setDesigns] = useState()
 
 
   const handleMouseOver = () => {
@@ -120,77 +123,97 @@ const AdminDashboardPage = () => {
     setIsHovered(false)
   }
 
+  useEffect(() => {
+    const func = async () => {
+      try {
+        await getAllDesigns().then((res) => {
+          console.log(res.data)
+          setDesigns(res.data)
+          console.log(designs)
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    func()
+  }, [])
+  
+
   return (
     <Grid
       container
       spacing={2}
       sx={{ height: '80vh', padding: '0', margin: '0' }}
     >
-      <Grid item xs={4}>
-        <Card
-          sx={{ maxWidth: 345 }}
-          onMouseOver={handleMouseOver}
-          onMouseOut={handleMouseOut}
-        >
-          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                R
-              </Avatar>
-            }
-            title="Design a"
-            subheader="September 14, 2023"
-          />
-          <CardActionArea>
-            {isHovered ? (
-              <CardContent sx={{ minHeight: '220px' }}>
-                <Box ml={2}>
-                  <CardMedia
-                    component="img"
-                    height="194"
-                    image="/static/images/cards/design.jpg"
-                    alt="design a"
-                  />
-                </Box>
-                <CardActions>
-                  <Btn display={display} id={1}/>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <Typography variant="body1" color="initial">
-                    233
-                  </Typography>
-                </CardActions>
-              </CardContent>
-            ) : (
-              <CardContent sx={{ minHeight: '220px' }}>
-                <Box ml={2}>
-                  <CardMedia
-                    component="img"
-                    height="194"
-                    image="/static/images/cards/paella.jpg"
-                    alt="design a "
-                  />
-                </Box>
-                <CardActions>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <Typography variant="body1" color="initial">
-                    233
-                  </Typography>
-                </CardActions>
-              </CardContent>
-            )}
-          </CardActionArea>
-          {/* <CardActions disableSpacing>
+      {designs ? (designs.map((design) => {
+        return (
+          <Grid item xs={4}>
+            <Card
+              sx={{ maxWidth: 345 }}
+              onMouseOver={handleMouseOver}
+              onMouseOut={handleMouseOut}
+            >
+              <CardHeader
+                avatar={
+                  <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                    R
+                  </Avatar>
+                }
+                title={design.title}
+                // subheader="September 14, 2023"
+              />
+              <CardActionArea>
+                {isHovered ? (
+                  <CardContent sx={{ minHeight: '220px' }}>
+                    <Box ml={2}>
+                      <CardMedia
+                        component="img"
+                        height="194"
+                        image={design._image}
+                        alt={design.title}
+                      />
+                    </Box>
+                    <CardActions>
+                      <Btn display={display} id={design.design_id} />
+                      <IconButton aria-label="add to favorites">
+                        <FavoriteIcon />
+                      </IconButton>
+                      <Typography variant="body1" color="initial">
+                        {design.likes}
+                      </Typography>
+                    </CardActions>
+                  </CardContent>
+                ) : (
+                  <CardContent sx={{ minHeight: '220px' }}>
+                    <Box ml={2}>
+                      <CardMedia
+                        component="img"
+                        height="194"
+                        image={design._image}
+                        alt={design.title}
+                      />
+                    </Box>
+                    <CardActions>
+                      <IconButton aria-label="add to favorites">
+                        <FavoriteIcon />
+                      </IconButton>
+                      <Typography variant="body1" color="initial">
+                        {design.likes}
+                      </Typography>
+                    </CardActions>
+                  </CardContent>
+                )}
+              </CardActionArea>
+              {/* <CardActions disableSpacing>
             <IconButton aria-label="add to favorites">
               <FavoriteIcon />
             </IconButton>
             <Typography variant="body1" color="initial">233</Typography>
           </CardActions> */}
-        </Card>
-      </Grid>
+            </Card>
+          </Grid>
+        )
+      })): ('Loading...')}
     </Grid>
   )
 }

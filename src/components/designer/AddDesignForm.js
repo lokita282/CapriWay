@@ -87,7 +87,7 @@ const AddUserForm = () => {
 
     axios
       .post(
-        'https://bfea-2402-3a80-75b-ed23-7dd3-ad5-34cb-547e.ngrok-free.app/marketplace/upload-design/',
+        'https://a55d-2405-201-6-41fd-298e-7d54-c47b-ddaf.ngrok-free.app/marketplace/upload-design/',
         formdata,
         {
           headers: {
@@ -137,14 +137,30 @@ const AddUserForm = () => {
             />
           </Grid>
           <Grid item xs={6}>
-            <Tags handleTags={handleTags}/>
+            <Tags handleTags={handleTags} />
           </Grid>
 
-          <Grid item xs={6} sx={{ paddingBottom: '20px' }}>
+          <Grid item xs={1.5}>
+            Upload Image:
+          </Grid>
+          <Grid item xs={4.5} sx={{ paddingBottom: '20px' }}>
+            <TextField id="file" onChange={handleUpload} type="file" />
+          </Grid>
+          <Grid item xs={1.5}>
+            Upload Assets:
+          </Grid>
+          <Grid item xs={4.5} sx={{ paddingBottom: '20px' }}>
+            <TextField id="file" onChange={handleUpload} type="file" />
+          </Grid>
+          <Grid item xs={6}>
             <TextField
-              id="file"
-              onChange={handleUpload}
-              type="file"
+              id="description"
+              placeholder="Description"
+              name="description"
+              variant="outlined"
+              fullWidth
+              multiline 
+              onChange={handleChangeTitle}
             />
           </Grid>
           <Grid item xs={6}>

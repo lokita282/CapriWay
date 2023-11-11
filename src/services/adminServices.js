@@ -49,3 +49,27 @@ export const getDesignerUsers = () => {
     },
   })
 }
+
+export const getAllDesigns = () => {
+  return httpcommon.get(`/marketplace/admin_view`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
+export const getOneDesign = (id) => {
+  return httpcommon.get(`/marketplace/admin_view/?design_id=${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
+export const getUnapprovedDesigns = () => {
+  return httpcommon.get(`marketplace/admin_user_pending/`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
