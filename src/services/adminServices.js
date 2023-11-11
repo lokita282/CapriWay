@@ -73,3 +73,19 @@ export const getUnapprovedDesigns = () => {
     },
   })
 }
+
+export const getUnapprovedDesignsOfDesigner = (id) => {
+  return httpcommon.get(`marketplace/admin_specific_pending/?id=${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
+export const updateDesignStatus = (id, data) => {
+  return httpcommon.patch(`/marketplace/admin_view/?design_id=${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}

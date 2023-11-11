@@ -57,47 +57,50 @@ const ApproveDesign = () => {
               align="center"
             >
               <Typography variant="h5" color="initial">
-                Total pending reviews: {data.total}
+                Total pending reviews: {data.total_unapproved}
               </Typography>
             </Paper>
-            <Paper sx={{ padding: 3, borderRadius: 3 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <Typography variant="body1" color="initial">
-                    Name
-                  </Typography>
-                </Grid>
-                <Grid item xs={2} align="center">
-                  <Typography variant="body1" color="initial">
-                    Total pending reviews:
-                  </Typography>
-                </Grid>
-                <Grid item xs={2} align="center">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                      // setUserId(row.id)
-                      handleOpenView()
-                    }}
-                  >
-                    Designer details
-                  </Button>
-                </Grid>
-                <Grid item xs={2} align="center">
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => {
-                      // navigate(`/designer-unapproved/${userId}`)
-                      navigate(`/designer-unapproved/`)
-                    }}
-                  >
-                    Review
-                  </Button>
-                </Grid>
-              </Grid>
-            </Paper>
+            {data.users.map((user) => {
+              return (
+                <Paper sx={{ padding: 3, borderRadius: 3, marginBottom: 2 }}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <Typography variant="body1" color="initial">
+                        Name: {user._first_name}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={2} align="center">
+                      <Typography variant="body1" color="initial">
+                        Total pending reviews: {user.unapproved_designs}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={2} align="center">
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                          setUserId(user.id)
+                          handleOpenView()
+                        }}
+                      >
+                        Designer details
+                      </Button>
+                    </Grid>
+                    <Grid item xs={2} align="center">
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => {
+                          navigate(`/designer-unapproved/${user.id}`)
+                        }}
+                      >
+                        Review
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              )
+            })}
           </Grid>
         ) : (
           'Loading...'

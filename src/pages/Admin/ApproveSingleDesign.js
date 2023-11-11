@@ -1,7 +1,12 @@
 import { React, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router'
 import SideDrawer from '../../components/sidebar/Sidebar'
+import { Grid, Paper, Typography, Box, Button, Modal, TextField, CircularProgress } from '@mui/material'
+import { btn_modal, circularprog, df_jc_ac } from '../../theme/CssMy'
 import { getOneDesign } from '../../services/adminServices'
-import { Grid, Paper, Typography, Box, Button, Modal, TextField } from '@mui/material'
+import {updateDesignStatus } from '../../services/adminServices'
+import successHandler from '../../components/toasts/successHandler'
+import errorHandler from '../../components/toasts/errorHandler'
 
 const style = {
   position: 'absolute',
@@ -15,11 +20,14 @@ const style = {
 }
 
 const ApproveSingleDesign = () => {
-  const id = window.location.href.split('/')[4]
+  const id = window.location.href.split('/')[5]
+
+  const navigate = useNavigate()
   const [design, setDesign] = useState()
   const [json, setJson] = useState()
   const [openApprove, setOpenApprove] = useState(false)
   const [openReject, setOpenReject] = useState(false)
+  const [load, setLoad] = useState(false)
 
   const handleOpenApprove = () => {
     // console.log(userId)
@@ -36,33 +44,68 @@ const ApproveSingleDesign = () => {
   const handleCloseReject = () => setOpenReject(false)
 
    const handleChange = (e) => {
-     const name = e.target.name
      const value = e.target.value
-     setJson({ ...json, [name]: value })
+     setJson({ price: value })
      console.log(json)
    }
 
-  // useEffect(() => {
-  //   const func = async () => {
-  //     try {
-  //       await getOneDesign(id).then((res) => {
-  //         console.log(res.data)
-  //         setDesign(res.data[0])
-  //       })
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   func()
+   const handleSubmitApprove = async() => {
+    setLoad(true)
+    await updateDesignStatus(id, { ...json, isApproved: true })
+      .then((res) => {
+        console.log('first')
+        console.log(res.data)
+        successHandler('Design Approved!')
+        setLoad(false)
+      })
+      .catch((e) => {
+        console.log(e)
+        errorHandler('Update design status failed')
+        setLoad(false)
+      })
+      handleCloseReject()
+      navigate('/approvedesign')
+   }
 
-  // }, [])
+   const handleSubmitReject = async () => {
+    setLoad(true)
+    await updateDesignStatus(id, { isRejected : true})
+      .then((res) => {
+        console.log('first')
+        console.log(res.data)
+        successHandler('Design Rejected!')
+        setLoad(false)
+      })
+      .catch((e) => {
+        console.log(e)
+        errorHandler('Update design status failed')
+        setLoad(false)
+      })
+      handleCloseReject()
+      navigate('/approvedesign')
+   }
+
+  useEffect(() => {
+    const func = async () => {
+      try {
+        await getOneDesign(id).then((res) => {
+          console.log(res.data)
+          setDesign(res.data[0])
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    func()
+
+  }, [])
 
   return (
     <SideDrawer>
-      <Grid container spacing={2}>
-        {/* {design ? (
-          <>
-            <Grid item xs={12}>
+      {design ? (
+        <>
+          <Grid container spacing={2}>
+            {/* <Grid item xs={12}>
               <Paper sx={{ padding: 3, borderRadius: 3 }}>
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
@@ -73,7 +116,7 @@ const ApproveSingleDesign = () => {
                   </Grid>
                 </Grid>
               </Paper>
-            </Grid>
+            </Grid> */}
             <Grid item xs={6}>
               <Paper sx={{ padding: 3, borderRadius: 3, minHeight: '100%' }}>
                 <img src={design._image} alt={design.title} />
@@ -81,94 +124,54 @@ const ApproveSingleDesign = () => {
             </Grid>
             <Grid item xs={6}>
               <Paper sx={{ padding: 3, borderRadius: 3 }}>
-                <Typography variant="h5" color="initial" align="center"><b>{design.title}</b></Typography>
-                <Typography variant="body1" color="initial">{design.description}</Typography>
-                <Box textAlign='center'>
-                <Button variant="contained" color="primary" align="center">
-                  Download
-                </Button>
+                <Typography variant="h5" color="initial" align="center">
+                  <b>{design.title}</b>
+                </Typography>
+                <Typography variant="body1" color="initial">
+                  {design.description}
+                </Typography>
+                <Box textAlign="center">
+                  <Button variant="contained" color="primary" align="center">
+                    Download
+                  </Button>
                 </Box>
               </Paper>
             </Grid>
-          </>
-        ) : (
-          'Loading...'
-        )} */}
-
-        <Grid item xs={12}>
-          <Paper sx={{ padding: 3, borderRadius: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <Typography variant="body1" color="initial">
-                  {/* Name: {design.uploaderName} */}
-                  name
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography variant="body1" color="initial" align="right">
-                  {/* Likes: {design.likes} */}
-                  Likes
-                </Typography>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper sx={{ padding: 3, borderRadius: 3 }}>
-            {/* <img src={design._image} alt={design.title} /> */}
-          </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper sx={{ padding: 3, borderRadius: 3 }}>
-            <Typography variant="h5" color="initial" align="center">
-              {/* <b>{design.title}</b> */}
-              title
-            </Typography>
-            <Typography variant="body1" color="initial">
-              {/* {design.description} */}
-              desc
-            </Typography>
-            <Box textAlign="center">
-              <Button variant="contained" color="primary" align="center">
-                Download
+            <Grid item xs={12} align="center" sx={{ mt: 10 }}>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                  margin: 2,
+                  backgroundColor: 'green',
+                  '&:hover': {
+                    backgroundColor: 'green',
+                  },
+                }}
+                onClick={handleOpenApprove}
+              >
+                Approve
               </Button>
-            </Box>
-          </Paper>
-        </Grid>
-      </Grid>
-
-      <Grid container spacing={2}>
-        <Grid item xs={12} align="center">
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{
-              margin: 2,
-              backgroundColor: 'green',
-              '&:hover': {
-                backgroundColor: 'green',
-              },
-            }}
-            onClick={handleOpenApprove}
-          >
-            Approve
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{
-              margin: 2,
-              backgroundColor: 'red',
-              '&:hover': {
-                backgroundColor: 'red',
-              },
-            }}
-            onClick={handleOpenReject}
-          >
-            Reject
-          </Button>
-        </Grid>
-      </Grid>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                  margin: 2,
+                  backgroundColor: 'red',
+                  '&:hover': {
+                    backgroundColor: 'red',
+                  },
+                }}
+                onClick={handleOpenReject}
+              >
+                Reject
+              </Button>
+            </Grid>
+          </Grid>
+        </>
+      ) : (
+        'Loading...'
+      )}
 
       {/* Approve design Modal */}
       <Modal
@@ -200,9 +203,27 @@ const ApproveSingleDesign = () => {
               />
             </Grid>
             <Grid item xs={12} align="right" sx={{ marginRight: 2 }}>
-              <Button variant="contained" color="primary">
-                Confirm
+              <Button
+                variant="outlined"
+                color="primary"
+                sx={{ marginRight: 2 }}
+                onClick={handleCloseApprove}
+              >
+                Cancel
               </Button>
+              {load ? (
+                  <Button sx={btn_modal} onClick={handleSubmitApprove}>
+                    <CircularProgress size={15} sx={circularprog} />
+                  </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmitApprove}
+                >
+                  Confirm
+                </Button>
+              )}
             </Grid>
           </Grid>
         </Box>
@@ -225,13 +246,31 @@ const ApproveSingleDesign = () => {
 
             <Grid item xs={12}>
               <Typography variant="body1" color="initial">
-              Are you sure you want to reject this design?
+                Are you sure you want to reject this design?
               </Typography>
             </Grid>
             <Grid item xs={12} align="right" sx={{ marginRight: 2 }}>
-              <Button variant="contained" color="primary">
-                Reject
+              <Button
+                variant="outlined"
+                color="primary"
+                sx={{ marginRight: 2 }}
+                onClick={handleCloseReject}
+              >
+                Cancel
               </Button>
+              {load ? (
+                  <Button sx={btn_modal} onClick={handleSubmitReject}>
+                    <CircularProgress size={15} sx={circularprog} />
+                  </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmitReject}
+                >
+                  Reject
+                </Button>
+              )}
             </Grid>
           </Grid>
         </Box>

@@ -48,12 +48,12 @@ export default function MainRouter() {
             <Route exact path="/approvedesign" element={<ApproveDesign />} />
           </Route>
 
-          <Route path="/designer-unapproved" element={<PrivateRouter />}>
-            <Route exact path="/designer-unapproved" element={<DesignerUnapproved />} />
+          <Route path="/designer-unapproved/:id" element={<PrivateRouter />}>
+            <Route exact path="/designer-unapproved/:id" element={<DesignerUnapproved />} />
           </Route>
 
-          <Route path="/designer-unapproved/:id" element={<PrivateRouter />}>
-            <Route exact path="/designer-unapproved/:id" element={<ApproveSingleDesign />} />
+          <Route path="/designer-unapproved/design/:id" element={<PrivateRouter />}>
+            <Route exact path="/designer-unapproved/design/:id" element={<ApproveSingleDesign />} />
           </Route>
 
           <Route path="/managepayments" element={<PrivateRouter />}>
