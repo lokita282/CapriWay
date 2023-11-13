@@ -110,8 +110,9 @@ const AdminDashboardPage = () => {
   const [expanded, setExpanded] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [display, setDisplay] = useState('notdisplayed')
-
   const [designs, setDesigns] = useState()
+
+  const user = JSON.parse(localStorage.getItem('capriwayUsername'))
 
 
   const handleMouseOver = () => {
@@ -145,75 +146,84 @@ const AdminDashboardPage = () => {
       spacing={2}
       sx={{ height: '80vh', padding: '0', margin: '0' }}
     >
-      {designs ? (designs.map((design) => {
-        return (
-          <Grid item xs={4}>
-            <Card
-              sx={{ maxWidth: 345 }}
-              onMouseOver={handleMouseOver}
-              onMouseOut={handleMouseOut}
-            >
-              <CardHeader
-                avatar={
-                  <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                    R
-                  </Avatar>
-                }
-                title={design.title}
-                // subheader="September 14, 2023"
-              />
-              <CardActionArea>
-                {isHovered ? (
-                  <CardContent sx={{ minHeight: '220px' }}>
-                    <Box ml={2}>
-                      <CardMedia
-                        component="img"
-                        height="194"
-                        image={design._image}
-                        alt={design.title}
-                      />
-                    </Box>
-                    <CardActions>
-                      <Btn display={display} id={design.design_id} />
-                      <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
-                      </IconButton>
-                      <Typography variant="body1" color="initial">
-                        {design.likes}
-                      </Typography>
-                    </CardActions>
-                  </CardContent>
-                ) : (
-                  <CardContent sx={{ minHeight: '220px' }}>
-                    <Box ml={2}>
-                      <CardMedia
-                        component="img"
-                        height="194"
-                        image={design._image}
-                        alt={design.title}
-                      />
-                    </Box>
-                    <CardActions>
-                      <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
-                      </IconButton>
-                      <Typography variant="body1" color="initial">
-                        {design.likes}
-                      </Typography>
-                    </CardActions>
-                  </CardContent>
-                )}
-              </CardActionArea>
-              {/* <CardActions disableSpacing>
+      <Grid item xs={12}>
+        <Typography variant="h4" color="initial">
+          Hi, {user}
+        </Typography>
+        <Typography variant="body1" color="initial">View all designs here</Typography>
+        <Typography variant="body1" color="initial"></Typography>
+      </Grid>
+      {designs
+        ? designs.map((design) => {
+            return (
+              <Grid item xs={4}>
+                <Card
+                  sx={{ maxWidth: 345 }}
+                  onMouseOver={handleMouseOver}
+                  onMouseOut={handleMouseOut}
+                >
+                  <CardHeader
+                    avatar={
+                      <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                        R
+                      </Avatar>
+                    }
+                    title={design.title}
+                    // subheader="September 14, 2023"
+                  />
+                  <CardActionArea>
+                    {isHovered ? (
+                      <CardContent sx={{ minHeight: '220px' }}>
+                        <Box ml={2}>
+                          <CardMedia
+                            component="img"
+                            height="194"
+                            image={design._image}
+                            alt={design.title}
+                          />
+                        </Box>
+                        <CardActions>
+                          <Btn display={display} id={design.design_id} />
+                          <IconButton aria-label="add to favorites">
+                            <FavoriteIcon />
+                          </IconButton>
+                          <Typography variant="body1" color="initial">
+                            {design.likes}
+                          </Typography>
+                        </CardActions>
+                      </CardContent>
+                    ) : (
+                      <CardContent sx={{ minHeight: '220px' }}>
+                        <Box ml={2}>
+                          <CardMedia
+                            component="img"
+                            height="194"
+                            image={design._image}
+                            alt={design.title}
+                          />
+                        </Box>
+                        <CardActions>
+                          <IconButton aria-label="add to favorites">
+                            <FavoriteIcon />
+                          </IconButton>
+                          <Typography variant="body1" color="initial">
+                            {design.likes}
+                          </Typography>
+                        </CardActions>
+                      </CardContent>
+                    )}
+                  </CardActionArea>
+                  {/* <CardActions disableSpacing>
             <IconButton aria-label="add to favorites">
               <FavoriteIcon />
             </IconButton>
             <Typography variant="body1" color="initial">233</Typography>
           </CardActions> */}
-            </Card>
-          </Grid>
-        )
-      })): ('Loading...')}
+                </Card>
+              </Grid>
+            )
+          })
+        : 'Loading...'}
     </Grid>
   )
 }
