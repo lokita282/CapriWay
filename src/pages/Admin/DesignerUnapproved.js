@@ -12,11 +12,13 @@ import {
   CardActions,
   CardMedia,
   CardContent,
-  Avatar
+  Avatar,
+  Chip
 } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import { red } from '@mui/material/colors'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import { Icon } from '@iconify/react'
 import {getUnapprovedDesignsOfDesigner} from '../../services/adminServices'
 
 const Btn = ({ display, id }) => {
@@ -24,12 +26,12 @@ const Btn = ({ display, id }) => {
   return (
     <div className={display}>
       <Button
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
+        // style={{
+        //   position: 'absolute',
+        //   top: '50%',
+        //   left: '50%',
+        //   transform: 'translate(-50%, -50%)',
+        // }}
         variant="contained"
         onClick={() => {
           navigate(`/designer-unapproved/design/${id}`)
@@ -145,13 +147,41 @@ const DesignerUnapproved = () => {
                             />
                           </Box>
                           <CardActions>
-                            <Btn display={display} id={design.design_id} />
                             <IconButton aria-label="add to favorites">
                               <FavoriteIcon />
                             </IconButton>
                             <Typography variant="body1" color="initial">
                               {design.likes}
                             </Typography>
+                            <Grid item xs={10.5}>
+                              {design.tags.tags.tags
+                                ? design.tags.tags.tags.map((tag) => {
+                                    return (
+                                      <Chip
+                                        label={tag}
+                                        sx={{ marginLeft: '1em' }}
+                                      />
+                                    )
+                                  })
+                                : 'Loading...'}
+                            </Grid>
+                            <Grid item xs={1.5}>
+                              {design.isPremium === true ? (
+                                <Icon
+                                  icon="fa6-solid:crown"
+                                  color="#FCEA2B"
+                                  width="26"
+                                  height="26"
+                                  style={{
+                                    stroke: 'black',
+                                    strokeWidth: '5',
+                                  }}
+                                />
+                              ) : (
+                                ''
+                              )}
+                            </Grid>
+                            <Btn display={display} id={design.design_id} />
                           </CardActions>
                         </CardContent>
                       ) : (
@@ -171,6 +201,34 @@ const DesignerUnapproved = () => {
                             <Typography variant="body1" color="initial">
                               {design.likes}
                             </Typography>
+                            <Grid item xs={10.5}>
+                              {design.tags.tags.tags
+                                ? design.tags.tags.tags.map((tag) => {
+                                    return (
+                                      <Chip
+                                        label={tag}
+                                        sx={{ marginLeft: '1em' }}
+                                      />
+                                    )
+                                  })
+                                : 'Loading...'}
+                            </Grid>
+                            <Grid item xs={1.5}>
+                              {design.isPremium === true ? (
+                                <Icon
+                                  icon="fa6-solid:crown"
+                                  color="#FCEA2B"
+                                  width="26"
+                                  height="26"
+                                  style={{
+                                    stroke: 'black',
+                                    strokeWidth: '5',
+                                  }}
+                                />
+                              ) : (
+                                ''
+                              )}
+                            </Grid>
                           </CardActions>
                         </CardContent>
                       )}
@@ -186,16 +244,6 @@ const DesignerUnapproved = () => {
               )
             })
           : 'Loading...'}
-        {/* <Button
-        variant="text"
-        color="primary"
-        onClick={() => {
-          // navigate(`/designer-unapproved/${userId}`)
-          navigate(`/designer-unapproved/1`)
-        }}
-      >
-        View
-      </Button> */}
       </Grid>
     </SideDrawer>
   )

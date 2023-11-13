@@ -56,7 +56,9 @@ const styles = {
 const AddUserForm = () => {
 
   const [title, setTitle] = useState('')
-  const [file, setFile] = useState('')
+  const [description, setDescription] = useState('')
+  const [image, setImage] = useState('')
+  const [assets, setAssets] = useState('')
   const [checked, setChecked] = useState(true)
   const [load, setLoad] = useState(false)
   const [tags, setTags] = useState([])
@@ -71,6 +73,12 @@ const AddUserForm = () => {
     console.log(e.target.value)
   }
 
+  const handleChangeDescription = (e) => {
+    setDescription(e.target.value)
+    console.log('desc')
+    console.log(e.target.value)
+  }
+
   const handleChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked)
   }
@@ -79,8 +87,10 @@ const AddUserForm = () => {
     setLoad(true)
 
     const formdata = new FormData()
-    formdata.append('_image', file)
+    formdata.append('_image', image)
+    formdata.append('assets', assets)  
     formdata.append('title', title)
+    formdata.append('description', description)
     formdata.append('tags', JSON.stringify({ tags: { tags: tags } }))
     formdata.append('uploaderEmail', localStorage.getItem('capriwayUserEmail').replace(/['"]+/g, ''))
     formdata.append('isPremium', checked)
@@ -108,9 +118,14 @@ const AddUserForm = () => {
       })      
   }
 
-    const handleUpload = (e) => {
+    const handleUploadImage = (e) => {
       console.log(e.target.files[0])
-      setFile(e.target.files[0])
+      setImage(e.target.files[0])
+     }
+
+    const handleUploadAssets = (e) => {
+      console.log(e.target.files[0])
+      setAssets(e.target.files[0])
      }
 
   return (
@@ -144,13 +159,13 @@ const AddUserForm = () => {
             Upload Image:
           </Grid>
           <Grid item xs={4.5} sx={{ paddingBottom: '20px' }}>
-            <TextField id="file" onChange={handleUpload} type="file" />
+            <TextField id="file" onChange={handleUploadImage} type="file" />
           </Grid>
           <Grid item xs={1.5}>
             Upload Assets:
           </Grid>
           <Grid item xs={4.5} sx={{ paddingBottom: '20px' }}>
-            <TextField id="file" onChange={handleUpload} type="file" />
+            <TextField id="file" onChange={handleUploadAssets} type="file" />
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -160,7 +175,7 @@ const AddUserForm = () => {
               variant="outlined"
               fullWidth
               multiline 
-              onChange={handleChangeTitle}
+              onChange={handleChangeDescription}
             />
           </Grid>
           <Grid item xs={6}>

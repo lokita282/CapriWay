@@ -1,22 +1,5 @@
 import { React, useState, useEffect } from 'react'
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
-  ListItemIcon,
-  ListItemButton,
-  Grid,
-  Modal,
-  Box,
-  Button,
-  Typography,
-  CircularProgress,
-  TextField,
-} from '@mui/material'
+import { Grid, Button, Typography } from '@mui/material'
 import { btn_bank, circularprog, df_jc_ac } from '../../theme/CssMy'
 import successHandler from '../toasts/successHandler'
 import errorHandler from '../toasts/errorHandler'
@@ -39,9 +22,8 @@ const ViewUser = ({ userId, handleCloseView, state, setState }) => {
         console.log(error)
       }
     }
-    func() 
+    func()
   }, [])
-  
 
   const renderData = async () => {
     setState(!state)

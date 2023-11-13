@@ -190,7 +190,9 @@ export default function SideDrawer(props) {
                       <ListItemIcon sx={listItemIco}>
                         <Icon
                           color={
-                            url.includes('managepayments') ? '#375EC0' : '#6A707F'
+                            url.includes('managepayments')
+                              ? '#375EC0'
+                              : '#6A707F'
                           }
                           icon="mdi:cash"
                           width="24"
@@ -260,6 +262,26 @@ export default function SideDrawer(props) {
                           color={url === '' ? '#375EC0' : '#6A707F'}
                           width="26"
                           height="26"
+                        />
+                      </ListItemIcon>
+                    </ListItemButton>
+                  </ListItem>
+                </Tooltip>
+                <Tooltip title="View Purchased Designs">
+                  <ListItem
+                    disablePadding
+                    onClick={() => navigate('/purchased')}
+                    sx={{ display: 'block', marginTop: '20%' }}
+                  >
+                    <ListItemButton sx={listItemBtn}>
+                      <ListItemIcon sx={listItemIco}>
+                        <Icon
+                          icon="bxs:cart"
+                          color={
+                            url.includes('purchased') ? '#375EC0' : '#6A707F'
+                          }
+                          width="27"
+                          height="27"
                         />
                       </ListItemIcon>
                     </ListItemButton>

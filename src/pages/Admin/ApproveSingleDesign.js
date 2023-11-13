@@ -1,8 +1,8 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import SideDrawer from '../../components/sidebar/Sidebar'
-import { Grid, Paper, Typography, Box, Button, Modal, TextField, CircularProgress } from '@mui/material'
-import { btn_modal, circularprog, df_jc_ac } from '../../theme/CssMy'
+import { Grid, Paper, Typography, Box, Button, Modal, TextField, CircularProgress, Link } from '@mui/material'
+import { btn_modal, circularprog, link } from '../../theme/CssMy'
 import { getOneDesign } from '../../services/adminServices'
 import {updateDesignStatus } from '../../services/adminServices'
 import successHandler from '../../components/toasts/successHandler'
@@ -131,8 +131,13 @@ const ApproveSingleDesign = () => {
                   {design.description}
                 </Typography>
                 <Box textAlign="center">
-                  <Button variant="contained" color="primary" align="center">
-                    Download
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    align="center"
+                    navigate={design.asset}
+                  >
+                    <Link sx={link} href={design.asset}> Download</Link>
                   </Button>
                 </Box>
               </Paper>
@@ -212,9 +217,9 @@ const ApproveSingleDesign = () => {
                 Cancel
               </Button>
               {load ? (
-                  <Button sx={btn_modal} onClick={handleSubmitApprove}>
-                    <CircularProgress size={15} sx={circularprog} />
-                  </Button>
+                <Button sx={btn_modal} onClick={handleSubmitApprove}>
+                  <CircularProgress size={15} sx={circularprog} />
+                </Button>
               ) : (
                 <Button
                   variant="contained"
@@ -259,9 +264,9 @@ const ApproveSingleDesign = () => {
                 Cancel
               </Button>
               {load ? (
-                  <Button sx={btn_modal} onClick={handleSubmitReject}>
-                    <CircularProgress size={15} sx={circularprog} />
-                  </Button>
+                <Button sx={btn_modal} onClick={handleSubmitReject}>
+                  <CircularProgress size={15} sx={circularprog} />
+                </Button>
               ) : (
                 <Button
                   variant="contained"

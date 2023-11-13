@@ -66,7 +66,7 @@ const ApproveDesign = () => {
                   <Grid container spacing={2}>
                     <Grid item xs={6}>
                       <Typography variant="body1" color="initial">
-                        Name: {user._first_name}
+                        Name: {user.name}
                       </Typography>
                     </Grid>
                     <Grid item xs={2} align="center">

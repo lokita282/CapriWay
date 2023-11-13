@@ -31,6 +31,7 @@ export default function Login() {
                   localStorage.setItem('capriwayToken', res.data.access)
                   localStorage.setItem('capriwayUser', JSON.stringify(res.data.role))
                   localStorage.setItem('capriwayUserEmail', JSON.stringify(res.data.email))
+                  localStorage.setItem('capriwayPaidUser', JSON.stringify(res.data.paid))
                   setUser(JSON.stringify(res.data.role))
                   setToken(res.data.access)
                   successHandler('Logged in successfully')

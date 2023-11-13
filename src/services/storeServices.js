@@ -7,3 +7,11 @@ export const viewAllDesigns = () => {
     },
   })
 }
+
+export const viewPurchased = () => {
+  return httpcommon.get(`/marketplace/shop/`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}

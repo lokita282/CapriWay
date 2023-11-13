@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import SideDrawer from '../../components/sidebar/Sidebar'
-import { postedDesigns } from '../../services/designerServices'
+import { viewPurchased } from '../../services/storeServices'
 import { Icon } from '@iconify/react'
 import {
   Card,
@@ -12,14 +12,15 @@ import {
   Chip,
   InputAdornment,
   TextField,
-  Box, Button,
+  Box,
+  Button,
 } from '@mui/material'
 import Fuse from 'fuzzy-search'
 import { df_jc_ac, textField } from '../../theme/CssMy'
 
 const columns = ['title', 'tags']
 
-const PostedDesigns = () => {
+const ViewPurchased = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [designs, setDesigns] = useState()
   const [showMore, setShowMore] = useState(false)
@@ -28,7 +29,7 @@ const PostedDesigns = () => {
   useEffect(() => {
     const func = async () => {
       try {
-        await postedDesigns().then((res) => {
+        await viewPurchased().then((res) => {
           console.log(res.data.tags)
           setDesigns(res.data)
           setFilteredData(res.data)
@@ -167,58 +168,9 @@ const PostedDesigns = () => {
         ) : (
           <Box sx={{ ...df_jc_ac, height: '80vh' }}>{/* <Loading /> */}</Box>
         )}
-        {/* {designs ? designs.map((design) => {
-            return (
-              <>
-                <Grid item xs={4}>
-                  <Card sx={{ maxWidth: 345 }}>
-                    <CardMedia
-                      sx={{ height: 140 }}
-                      image="/static/images/cards/contemplative-reptile.jpg"
-                      title="green iguana"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {design.title}
-                      </Typography>
-                      <Grid container spacing={2}>
-                        <Grid item xs={10.5}>
-                          {design.tags.tags.tags
-                            ? design.tags.tags.tags.map((tag) => {
-                                return (
-                                  <Chip
-                                    label={tag}
-                                    sx={{ marginRight: '1em' }}
-                                  />
-                                )
-                              })
-                            : 'Loading...'}
-                        </Grid>
-                        <Grid item xs={1.5}>
-                          {design.isPremium === true ? (
-                            <Icon
-                              icon="fa6-solid:crown"
-                              color="#FCEA2B"
-                              width="26"
-                              height="26"
-                              style={{ stroke: 'black', strokeWidth: '5' }}
-                            />
-                          ) : (
-                            ''
-                          )}
-                        </Grid>
-                      </Grid>
-                    </CardContent>
-                    <CardActions>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              </>
-            )
-          }): ('Loading...')} */}
       </Grid>
     </SideDrawer>
   )
 }
 
-export default PostedDesigns
+export default ViewPurchased

@@ -1,6 +1,7 @@
 import {React, useState, useEffect} from 'react'
 import SideDrawer from '../../components/sidebar/Sidebar'
-import { Grid, Typography, Paper, Button, Box } from '@mui/material'
+import { Grid, Typography, Paper, Button, Box, Link } from '@mui/material'
+import {link} from '../../theme/CssMy'
 import {getOneDesign} from '../../services/adminServices'
 
 const ViewOneDesign = () => {
@@ -41,9 +42,9 @@ const ViewOneDesign = () => {
                 </Grid>
               </Paper>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} alignItems="center">
               <Paper sx={{ padding: 3, borderRadius: 3, minHeight: '100%' }}>
-                <img src={design._image} alt={design.title} />
+                <img src={design._image} alt={design.title} style={{margin: 'auto'}} />
               </Paper>
             </Grid>
             <Grid item xs={6}>
@@ -52,7 +53,7 @@ const ViewOneDesign = () => {
                 <Typography variant="body1" color="initial">{design.description}</Typography>
                 <Box textAlign='center'>
                 <Button variant="contained" color="primary" align="center">
-                  Download
+                 <Link sx={link} href={design.asset}> Download</Link>
                 </Button>
                 </Box>
               </Paper>

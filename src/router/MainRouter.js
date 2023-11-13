@@ -10,6 +10,7 @@ import DesignerUnapproved from '../pages/Admin/DesignerUnapproved'
 import ApproveSingleDesign from '../pages/Admin/ApproveSingleDesign'
 import ManagePayments from '../pages/Admin/ManagePayments';
 import PostedDesigns from '../pages/Designer/PostedDesigns';
+import ViewPurchased from '../pages/Store/ViewPurchased';
 
 export default function MainRouter() {
     const { user, setUser, setOpen } = useContext(capriwaycontext)
@@ -62,6 +63,10 @@ export default function MainRouter() {
 
           <Route path="/posteddesigns" element={<PrivateRouter />}>
             <Route exact path="/posteddesigns" element={<PostedDesigns />} />
+          </Route>
+
+          <Route path="/purchased" element={<PrivateRouter />}>
+            <Route exact path="/purchased" element={<ViewPurchased />} />
           </Route>
         </Routes>
       </>
