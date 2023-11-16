@@ -62,7 +62,7 @@ const ViewPurchased = () => {
       <Grid container spacing={2}>
         {filteredData.length ? (
           <>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Box sx={{ padding: '2% 20%' }}>
                 <TextField
                   value={searchTerm}
@@ -78,7 +78,7 @@ const ViewPurchased = () => {
                   onChange={handleSearch}
                 />
               </Box>
-            </Grid>
+            </Grid> */}
             {designs
               ? designs.map((design) => {
                   return (
