@@ -89,3 +89,11 @@ export const updateDesignStatus = (id, data) => {
     },
   })
 }
+
+export const getTransactions = () => {
+  return httpcommon.get(`marketplace/transactions`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}

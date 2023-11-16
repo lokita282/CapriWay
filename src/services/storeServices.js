@@ -8,8 +8,24 @@ export const viewAllDesigns = () => {
   })
 }
 
+export const buyDesign = (data) => {
+  return httpcommon.post(`/marketplace/design_pay/`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
+export const paymentConfirmation = (data) => {
+  return httpcommon.post(`/marketplace/payment-status/`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
 export const viewPurchased = () => {
-  return httpcommon.get(`/marketplace/shop/`, {
+  return httpcommon.get(`/marketplace/owned/`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
     },

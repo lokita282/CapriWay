@@ -26,15 +26,21 @@ const ApproveSingleDesign = () => {
   const [design, setDesign] = useState()
   const [json, setJson] = useState()
   const [openApprove, setOpenApprove] = useState(false)
+  const [openApproveFree, setOpenApproveFree] = useState(false)
   const [openReject, setOpenReject] = useState(false)
   const [load, setLoad] = useState(false)
 
   const handleOpenApprove = () => {
-    // console.log(userId)
     setOpenApprove(true)
   }
 
+  const handleOpenApproveFree = () => {
+    setOpenApproveFree(true)
+  }
+
   const handleCloseApprove = () => setOpenApprove(false)
+
+  const handleCloseApproveFree = () => setOpenApproveFree(false)
 
   const handleOpenReject = () => {
     // console.log(userId)
@@ -52,6 +58,24 @@ const ApproveSingleDesign = () => {
    const handleSubmitApprove = async() => {
     setLoad(true)
     await updateDesignStatus(id, { ...json, isApproved: true })
+      .then((res) => {
+        console.log('first')
+        console.log(res.data)
+        successHandler('Design Approved!')
+        setLoad(false)
+      })
+      .catch((e) => {
+        console.log(e)
+        errorHandler('Update design status failed')
+        setLoad(false)
+      })
+      handleCloseReject()
+      navigate('/approvedesign')
+   }
+
+   const handleSubmitApproveFree = async() => {
+    setLoad(true)
+    await updateDesignStatus(id, { isApproved: true })
       .then((res) => {
         console.log('first')
         console.log(res.data)
@@ -137,26 +161,47 @@ const ApproveSingleDesign = () => {
                     align="center"
                     navigate={design.asset}
                   >
-                    <Link sx={link} href={design.asset}> Download</Link>
+                    <Link sx={link} href={design.asset}>
+                      {' '}
+                      Download
+                    </Link>
                   </Button>
                 </Box>
               </Paper>
             </Grid>
             <Grid item xs={12} align="center" sx={{ mt: 10 }}>
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{
-                  margin: 2,
-                  backgroundColor: 'green',
-                  '&:hover': {
+              {design.isPremium ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{
+                    margin: 2,
                     backgroundColor: 'green',
-                  },
-                }}
-                onClick={handleOpenApprove}
-              >
-                Approve
-              </Button>
+                    '&:hover': {
+                      backgroundColor: 'green',
+                    },
+                  }}
+                  onClick={handleOpenApprove}
+                >
+                  Approve
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{
+                    margin: 2,
+                    backgroundColor: 'green',
+                    '&:hover': {
+                      backgroundColor: 'green',
+                    },
+                  }}
+                  onClick={handleOpenApproveFree}
+                >
+                  Approve
+                </Button>
+              )}
+
               <Button
                 variant="contained"
                 color="primary"
@@ -225,6 +270,48 @@ const ApproveSingleDesign = () => {
                   variant="contained"
                   color="primary"
                   onClick={handleSubmitApprove}
+                >
+                  Confirm
+                </Button>
+              )}
+            </Grid>
+          </Grid>
+        </Box>
+      </Modal>
+
+      {/* Free Design Approve */}
+      <Modal
+        open={openApproveFree}
+        onClose={handleCloseApproveFree}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography variant="h5" color="initial" align="center">
+                Approve Design
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12} align="right" sx={{ marginRight: 2 }}>
+              <Button
+                variant="outlined"
+                color="primary"
+                sx={{ marginRight: 2 }}
+                onClick={handleCloseApproveFree}
+              >
+                Cancel
+              </Button>
+              {load ? (
+                <Button sx={btn_modal} onClick={handleSubmitApproveFree}>
+                  <CircularProgress size={15} sx={circularprog} />
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmitApproveFree}
                 >
                   Confirm
                 </Button>

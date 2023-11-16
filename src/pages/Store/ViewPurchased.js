@@ -14,9 +14,10 @@ import {
   TextField,
   Box,
   Button,
+  Link
 } from '@mui/material'
 import Fuse from 'fuzzy-search'
-import { df_jc_ac, textField } from '../../theme/CssMy'
+import { df_jc_ac, textField, link } from '../../theme/CssMy'
 
 const columns = ['title', 'tags']
 
@@ -30,7 +31,6 @@ const ViewPurchased = () => {
     const func = async () => {
       try {
         await viewPurchased().then((res) => {
-          console.log(res.data.tags)
           setDesigns(res.data)
           setFilteredData(res.data)
           console.log(designs)
@@ -154,6 +154,16 @@ const ViewPurchased = () => {
                                 ) : (
                                   ''
                                 )}
+                                <Grid item xs={12} align="right">
+                                  <Button
+                              sx={{ float: 'right', marginRight: '0.4em' }}
+                              variant="contained"
+                            >
+                              <Link sx={link} href={design.asset}>
+                                Download
+                              </Link>
+                            </Button>
+                            </Grid>
                               </Grid>
                             </Grid>
                           </CardContent>
