@@ -66,9 +66,6 @@ export default function Login() {
                             <p style={ptag}>Password</p>
                             <TextField sx={textField} type='password' value={json.password} name='password' onChange={handleChange} placeholder='Password' />
                         </Grid>
-                        <Grid md={12} item sx={df_jfs_ac}>
-                            Don't have an account? &nbsp; <p style={link} onClick={() => navigate('/signup/beneficiary')}> Signup </p>
-                        </Grid>
                         <Grid item md={12}>
                             {load ? <Box sx={df_jc_ac}>
                                 <CircularProgress size={30} sx={circularprog} />

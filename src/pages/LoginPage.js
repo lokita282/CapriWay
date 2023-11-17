@@ -1,10 +1,7 @@
 import { Box, CardMedia, Grid } from '@mui/material'
 import React from 'react'
 import Carousel from 'react-material-ui-carousel'
-import img0 from '../images/img1.png'
-import img1 from '../images/img2.png'
-import img2 from '../images/img3.png'
-import img3 from '../images/img4.png'
+import img0 from '../images/login.png'
 import Login from '../components/auth/Login'
 
 function LoginPage() {
@@ -12,15 +9,6 @@ function LoginPage() {
     var items = [
         {
             img: img0,
-        },
-        {
-            img: img1,
-        },
-        {
-            img: img2,
-        },
-        {
-            img: img3,
         }
     ]
 

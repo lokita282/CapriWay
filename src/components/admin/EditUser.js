@@ -7,8 +7,8 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  ListItemIcon,
-  ListItemButton,
+  Checkbox,
+  FormControlLabel,
   Grid,
   Modal,
   Box,
@@ -24,6 +24,7 @@ import { editUser, getSingleUser } from '../../services/adminServices'
 
 const EditUser = ({ userId, handleCloseEdit, state, setState }) => {
   const [user, setUser] = useState()
+  const [checked, setChecked] = useState(false)
   // const [json, setJson] = useState({
   //   first_name: user.first_name,
   //   last_name: user.last_name,
@@ -38,9 +39,15 @@ const EditUser = ({ userId, handleCloseEdit, state, setState }) => {
   //   is_staff: true,
   //   is_active: true,
   // })
-  const [json, setJson] = useState({  })
-
+  const [json, setJson] = useState({   })
   const [load, setLoad] = useState(false)
+
+  const handleChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    setChecked(event.target.checked)
+    console.log(checked)
+   
+  }
 
   const handleChange = (e) => {
     const name = e.target.name
@@ -52,9 +59,14 @@ const EditUser = ({ userId, handleCloseEdit, state, setState }) => {
   const renderData = async () => {
     setState(!state)
   }
+    const handleMouseOver = () => {
+      console.log('in')
+      setJson({ ...json, paid: checked })
+    }
 
   const handleSubmit = async () => {
     setLoad(true)
+    console.log(json)
     await editUser(userId, json)
       .then((res) => {
         console.log('first')
@@ -75,7 +87,7 @@ const EditUser = ({ userId, handleCloseEdit, state, setState }) => {
     const func = async () => {
       try {
         await getSingleUser(userId).then((res) => {
-          console.log(res.data)
+          // console.log(res.data)
           setUser(res.data)
           // use(res.data)
           //  setFilteredData(res.data)
@@ -86,7 +98,7 @@ const EditUser = ({ userId, handleCloseEdit, state, setState }) => {
       }
     }
     func()
-  }, [user])
+  }, [])
 
   return (
     <Grid container spacing={2}>
@@ -138,7 +150,7 @@ const EditUser = ({ userId, handleCloseEdit, state, setState }) => {
               label=""
               defaultValue={user.email}
               name="email"
-              value={user.email}
+              // value={user.email}
               onChange={handleChange}
             />
           </Grid>
@@ -206,7 +218,7 @@ const EditUser = ({ userId, handleCloseEdit, state, setState }) => {
             <>
               <Grid item xs={6}>
                 <Typography variant="body1" color="initial">
-                  Store Name:
+                  Store Name
                 </Typography>
               </Grid>
               <Grid item xs={6}>
@@ -219,12 +231,23 @@ const EditUser = ({ userId, handleCloseEdit, state, setState }) => {
                   onChange={handleChange}
                 />
               </Grid>
+              <Grid item xs={6}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={checked}
+                      onChange={handleChecked}
+                      inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                  }
+                  label="Premium"
+                />
+              </Grid>
             </>
           ) : (
             <></>
           )}
 
-          <Grid item xs={6}></Grid>
           <Grid item xs={6} align="right">
             {load ? (
               <Box sx={df_jc_ac}>
@@ -237,6 +260,7 @@ const EditUser = ({ userId, handleCloseEdit, state, setState }) => {
                 variant="contained"
                 color="primary"
                 onClick={handleSubmit}
+                onMouseOver={handleMouseOver}
               >
                 Save
               </Button>

@@ -14,7 +14,7 @@ import {
   TextField,
   Box,
   Button,
-  Link
+  Link,
 } from '@mui/material'
 import Fuse from 'fuzzy-search'
 import { df_jc_ac, textField, link } from '../../theme/CssMy'
@@ -75,7 +75,7 @@ const ViewPurchased = () => {
                     ),
                   }}
                   placeholder="Search schemes"
-                  onChange={handleSearch}
+                  onChange={handleSearch}  
                 />
               </Box>
             </Grid> */}
@@ -156,14 +156,17 @@ const ViewPurchased = () => {
                                 )}
                                 <Grid item xs={12} align="right">
                                   <Button
-                              sx={{ float: 'right', marginRight: '0.4em' }}
-                              variant="contained"
-                            >
-                              <Link sx={link} href={design.asset}>
-                                Download
-                              </Link>
-                            </Button>
-                            </Grid>
+                                    sx={{
+                                      float: 'right',
+                                      marginRight: '0.4em',
+                                    }}
+                                    variant="contained"
+                                  >
+                                    <Link sx={link} href={design.asset}>
+                                      Download
+                                    </Link>
+                                  </Button>
+                                </Grid>
                               </Grid>
                             </Grid>
                           </CardContent>

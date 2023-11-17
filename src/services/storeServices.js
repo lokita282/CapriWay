@@ -31,3 +31,21 @@ export const viewPurchased = () => {
     },
   })
 }
+
+
+export const buySubscription = (data) => {
+  return httpcommon.post(`/marketplace/subscription_payment/`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
+
+export const paymentConfirmationSubscription = (data) => {
+  return httpcommon.post(`/marketplace/subscription-status/`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}

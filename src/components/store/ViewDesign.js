@@ -108,160 +108,92 @@ const PostedDesigns = () => {
             return (
               <>
                 <Grid item xs={4}>
-                  {isPaid ? (
-                    <Card sx={{ maxWidth: 345 }}>
+                  <Card sx={{ maxWidth: 345 }}>
+                    {design.isPremium ? (
+                      <CardMedia
+                        sx={{ height: 140 }}
+                        image={design._image}
+                        title="green iguana"
+                        style={{
+                          filter: 'blur(5px)',
+                          '-webkitFilter': 'blur(5px)',
+                          '-moz-filter': 'blur(5px)',
+                          '-o-filter': 'blur(5px)',
+                          '-ms-filter': 'blur(5px)',
+                        }}
+                      />
+                    ) : (
                       <CardMedia
                         sx={{ height: 140 }}
                         image={design._image}
                         title="green iguana"
                       />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {design.title}
-                        </Typography>
-                        <Grid container spacing={2}>
-                          <Grid item xs={10.5}>
-                            {design.tags.tags.tags
-                              ? design.tags.tags.tags.map((tag) => {
-                                  return (
-                                    <Chip
-                                      label={tag}
-                                      sx={{ marginRight: '1em' }}
-                                    />
-                                  )
-                                })
-                              : 'Loading...'}
-                          </Grid>
-                          <Grid item xs={1.5}>
-                            {design.isPremium === true ? (
-                              <Icon
-                                icon="fa6-solid:crown"
-                                color="#FCEA2B"
-                                width="26"
-                                height="26"
-                                style={{ stroke: 'black', strokeWidth: '5' }}
-                              />
-                            ) : (
-                              ''
-                            )}
-                          </Grid>
+                    )}
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {design.title}
+                      </Typography>
+                      <Grid container spacing={2}>
+                        <Grid item xs={10.5}>
+                          {design.tags.tags.tags
+                            ? design.tags.tags.tags.map((tag) => {
+                                return (
+                                  <Chip
+                                    label={tag}
+                                    sx={{ marginRight: '1em' }}
+                                  />
+                                )
+                              })
+                            : 'Loading...'}
                         </Grid>
-                      </CardContent>
-                      <CardActions>
-                        <Grid item xs={8}>
-                          <Typography variant="body1" color="initial">
-                            Rs. {design.price}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={4}>
-                          {design.isPremium ? (
-                            <Button
-                              sx={{ float: 'right', marginRight: '0.4em' }}
-                              variant="contained"
-                              onMouseEnter={()=>{
-                                handleSetData(design)
-                              }}
-
-                              onClick={() => {
-                                displayRazorpay()
-                              }}
-                            >
-                              Buy
-                            </Button>
+                        <Grid item xs={1.5}>
+                          {design.isPremium === true ? (
+                            <Icon
+                              icon="fa6-solid:crown"
+                              color="#FCEA2B"
+                              width="26"
+                              height="26"
+                              style={{ stroke: 'black', strokeWidth: '5' }}
+                            />
                           ) : (
-                            <Button
-                              sx={{ float: 'right', marginRight: '0.4em' }}
-                              variant="contained"
-                            >
-                              <Link sx={link} href={design.asset}>
-                                Download
-                              </Link>
-                            </Button>
+                            ''
                           )}
                         </Grid>
-                      </CardActions>
-                    </Card>
-                  ) : (
-                    <Card sx={{ maxWidth: 345 }}>
-                      {design.isPremium ? (
-                        <CardMedia
-                          sx={{ height: 140 }}
-                          image={design._image}
-                          title="green iguana"
-                          style={{
-                            filter: 'blur(5px)',
-                            '-webkitFilter': 'blur(5px)',
-                            '-moz-filter': 'blur(5px)',
-                            '-o-filter': 'blur(5px)',
-                            '-ms-filter': 'blur(5px)',
-                          }}
-                        />
-                      ) : (
-                        <CardMedia
-                          sx={{ height: 140 }}
-                          image={design._image}
-                          title="green iguana"
-                        />
-                      )}
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {design.title}
-                        </Typography>
-                        <Grid container spacing={2}>
-                          <Grid item xs={10.5}>
-                            {design.tags.tags.tags
-                              ? design.tags.tags.tags.map((tag) => {
-                                  return (
-                                    <Chip
-                                      label={tag}
-                                      sx={{ marginRight: '1em' }}
-                                    />
-                                  )
-                                })
-                              : 'Loading...'}
-                          </Grid>
-                          <Grid item xs={1.5}>
-                            {design.isPremium === true ? (
-                              <Icon
-                                icon="fa6-solid:crown"
-                                color="#FCEA2B"
-                                width="26"
-                                height="26"
-                                style={{ stroke: 'black', strokeWidth: '5' }}
-                              />
-                            ) : (
-                              ''
-                            )}
-                          </Grid>
-                        </Grid>
-                      </CardContent>
-                      <CardActions>
-                        <Grid item xs={8}>
+                      </Grid>
+                    </CardContent>
+                    <CardActions>
+                      <Grid item xs={8}>
+                        <Typography variant="body1" color="initial">
                           Rs. {design.price}
-                        </Grid>
-                        <Grid item xs={4}>
-                          {design.isPremium ? (
-                            <Button
-                              sx={{ float: 'right', marginRight: '0.4em' }}
-                              variant="contained"
-                              disabled
-                            >
-                              Buy
-                            </Button>
-                          ) : (
-                            <Button
-                              sx={{ float: 'right', marginRight: '0.4em' }}
-                              variant="contained"
-                            >
-                              <Link sx={link} href={design.asset}>
-                                Download
-                              </Link>
-                            </Button>
-                          )}
-                        </Grid>
-                      </CardActions>
-                    </Card>
-                  )}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={4}>
+                        {design.isPremium ? (
+                          <Button
+                            sx={{ float: 'right', marginRight: '0.4em' }}
+                            variant="contained"
+                            onMouseEnter={() => {
+                              handleSetData(design)
+                            }}
+                            onClick={() => {
+                              displayRazorpay()
+                            }}
+                          >
+                            Buy
+                          </Button>
+                        ) : (
+                          <Button
+                            sx={{ float: 'right', marginRight: '0.4em' }}
+                            variant="contained"
+                          >
+                            <Link sx={link} href={design.asset}>
+                              Download
+                            </Link>
+                          </Button>
+                        )}
+                      </Grid>
+                    </CardActions>
+                  </Card>
                 </Grid>
               </>
             )
