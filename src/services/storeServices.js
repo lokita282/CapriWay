@@ -49,3 +49,19 @@ export const paymentConfirmationSubscription = (data) => {
     },
   })
 }
+
+export const updateLikes = (data) => {
+  return httpcommon.post(`/marketplace/like/`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
+export const viewOneDesign = (id) => {
+  return httpcommon.get(`/marketplace/shop/?design_id=${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}

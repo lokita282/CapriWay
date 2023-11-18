@@ -93,11 +93,12 @@ const AddUserForm = () => {
     formdata.append('description', description)
     formdata.append('tags', JSON.stringify({ tags: { tags: tags } }))
     formdata.append('uploaderEmail', localStorage.getItem('capriwayUserEmail').replace(/['"]+/g, ''))
+    formdata.append('uploaderName', localStorage.getItem('capriwayUsername').replace(/['"]+/g, ''))
     formdata.append('isPremium', checked)
 
     axios
       .post(
-        'https://2e89-2405-201-6-41fd-4d9c-b89e-7674-45eb.ngrok-free.app/marketplace/upload-design/',
+        'sarthakbhan.pythonanywhere.com/marketplace/upload-design/',
         formdata,
         {
           headers: {

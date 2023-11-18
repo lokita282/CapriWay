@@ -10,27 +10,12 @@ const StoreDashboardPage = () => {
   const isPaid = JSON.parse(localStorage.getItem('capriwayPaidUser'))
 
   const [load, setLoad] = useState(false)
-  // const [json, setJson] = useState({
 
-  // })
   const [state, setState] = useState(false)
 
-  // const json = {
-  //   amount: 1000,
-  //   name: JSON.parse(localStorage.getItem('capriwayUsername')),
-  //   email: JSON.parse(localStorage.getItem('capriwayUserEmail')),
-  // }
   const json = {
     amount: 1000,
   }
-
-  // const handleSetData = (design) => {
-  //   setJson({
-  //     amount: 100000,
-  //     name: JSON.parse(localStorage.getItem('capriwayUsername')),
-  //     email: JSON.parse(localStorage.getItem('capriwayUserEmail')),
-  //   })
-  // }
 
   const displayRazorpay = async () => {
     await buySubscription(json)
@@ -94,10 +79,16 @@ const StoreDashboardPage = () => {
       </Grid>
       {isPaid ? (
         <>
-          <Typography variant="body1" color="initial">
-            View all designs here
-          </Typography>
-          <ViewDesign />
+          <Grid container spacing={2} sx={{ marginBottom: '1em' }}>
+            <Grid item xs={12}>
+              <Typography variant="body1" color="initial">
+                View all designs here
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <ViewDesign />
+            </Grid>
+          </Grid>
         </>
       ) : (
         <>

@@ -2,7 +2,6 @@ import {React, useState, useEffect} from 'react'
 import { styled } from '@mui/material/styles'
 import {Grid, Typography, Card, CardHeader, Avatar, CardMedia, CardContent, CardActions, Button, Box, CardActionArea} from '@mui/material'
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
-import { red } from '@mui/material/colors'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { useNavigate } from 'react-router'
 import { Icon } from '@iconify/react'
@@ -163,13 +162,8 @@ const AdminDashboardPage = () => {
                   onMouseOut={handleMouseOut}
                 >
                   <CardHeader
-                    avatar={
-                      <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        R
-                      </Avatar>
-                    }
                     title={design.title}
-                    // subheader="September 14, 2023"
+                    subheader={design.isPremium ? 'Premium' : 'Free'}
                   />
                   <CardActionArea>
                     {isHovered ? (
@@ -184,11 +178,17 @@ const AdminDashboardPage = () => {
                         </Box>
                         <CardActions>
                           <Btn display={display} id={design.design_id} />
-                          <IconButton aria-label="add to favorites">
+                          <Typography variant="body1" color="initial">
+                            Rs. {design.price}
+                          </Typography>
+                          <IconButton
+                            aria-label="add to favorites"
+                            sx={{ marginLeft: 'auto' }}
+                          >
                             <FavoriteIcon />
                           </IconButton>
                           <Typography variant="body1" color="initial">
-                            {design.likes}
+                            {design.likes_count}
                           </Typography>
                         </CardActions>
                       </CardContent>
@@ -203,11 +203,17 @@ const AdminDashboardPage = () => {
                           />
                         </Box>
                         <CardActions>
-                          <IconButton aria-label="add to favorites">
+                          <Typography variant="body1" color="initial">
+                            Rs. {design.price}
+                          </Typography>
+                          <IconButton
+                            aria-label="add to favorites"
+                            sx={{ marginLeft: 'auto' }}
+                          >
                             <FavoriteIcon />
                           </IconButton>
                           <Typography variant="body1" color="initial">
-                            {design.likes}
+                            {design.likes_count}
                           </Typography>
                         </CardActions>
                       </CardContent>

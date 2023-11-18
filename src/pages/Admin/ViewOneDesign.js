@@ -3,21 +3,35 @@ import SideDrawer from '../../components/sidebar/Sidebar'
 import { Grid, Typography, Paper, Button, Box, Link } from '@mui/material'
 import {link} from '../../theme/CssMy'
 import {getOneDesign} from '../../services/adminServices'
+import {viewOneDesign} from '../../services/storeServices'
 
 const ViewOneDesign = () => {
   const id = window.location.href.split('/')[4]
   const [design, setDesign] = useState()
+  const isAdmin = JSON.parse(localStorage.getItem('capriwayUser')) === 'admin' ? true : false
 
   useEffect(() => {
     const func = async () => {
-      try {
-        await getOneDesign(id).then((res) => {
-          console.log(res.data)
-          setDesign(res.data[0])
-        })
-      } catch (error) {
-        console.log(error)
+      if (isAdmin){
+        try {
+          await getOneDesign(id).then((res) => {
+            console.log(res.data)
+            setDesign(res.data[0])
+          })
+        } catch (error) {
+          console.log(error)
+        }
+      } else{
+        try {
+          await viewOneDesign(id).then((res) => {
+            console.log(res.data)
+            setDesign(res.data[0])
+          })
+        } catch (error) {
+          console.log(error)
+        }
       }
+      
     }
     func()
   
@@ -37,7 +51,7 @@ const ViewOneDesign = () => {
                     <Typography variant="body1" color="initial">Name: {design.uploaderName}</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="body1" color="initial" align="right">Likes: {design.likes} </Typography>
+                    <Typography variant="body1" color="initial" align="right">Likes: {design.likes_count} </Typography>
                   </Grid>
                 </Grid>
               </Paper>
@@ -53,7 +67,7 @@ const ViewOneDesign = () => {
                 <Typography variant="body1" color="initial">{design.description}</Typography>
                 <Box textAlign='center'>
                 <Button variant="contained" color="primary" align="center">
-                 <Link sx={link} href={design.asset}> Download</Link>
+                 <Link sx={link} href={design.asset}>Download</Link>
                 </Button>
                 </Box>
               </Paper>
