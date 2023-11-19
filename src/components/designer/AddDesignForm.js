@@ -98,7 +98,7 @@ const AddUserForm = () => {
 
     axios
       .post(
-        'sarthakbhan.pythonanywhere.com/marketplace/upload-design/',
+        'https://sarthakbhan.pythonanywhere.com/marketplace/upload-design/',
         formdata,
         {
           headers: {
