@@ -10,6 +10,7 @@ import DesignerUnapproved from '../pages/Admin/DesignerUnapproved'
 import ApproveSingleDesign from '../pages/Admin/ApproveSingleDesign'
 import ManagePayments from '../pages/Admin/ManagePayments';
 import PostedDesigns from '../pages/Designer/PostedDesigns';
+import AddDesign from '../pages/Designer/AddDesign';
 import ViewPurchased from '../pages/Store/ViewPurchased';
 
 export default function MainRouter() {
@@ -50,15 +51,30 @@ export default function MainRouter() {
           </Route>
 
           <Route path="/designer-unapproved/:id" element={<PrivateRouter />}>
-            <Route exact path="/designer-unapproved/:id" element={<DesignerUnapproved />} />
+            <Route
+              exact
+              path="/designer-unapproved/:id"
+              element={<DesignerUnapproved />}
+            />
           </Route>
 
-          <Route path="/designer-unapproved/design/:id" element={<PrivateRouter />}>
-            <Route exact path="/designer-unapproved/design/:id" element={<ApproveSingleDesign />} />
+          <Route
+            path="/designer-unapproved/design/:id"
+            element={<PrivateRouter />}
+          >
+            <Route
+              exact
+              path="/designer-unapproved/design/:id"
+              element={<ApproveSingleDesign />}
+            />
           </Route>
 
           <Route path="/managepayments" element={<PrivateRouter />}>
             <Route exact path="/managepayments" element={<ManagePayments />} />
+          </Route>
+
+          <Route path="/adddesign" element={<PrivateRouter />}>
+            <Route exact path="/adddesign" element={<AddDesign />} />
           </Route>
 
           <Route path="/posteddesigns" element={<PrivateRouter />}>

@@ -170,6 +170,7 @@ const AddUserForm = () => {
           <Grid item xs={6}>
             <TextField
               id="password"
+              type="password"
               placeholder="Password"
               name="password"
               variant="outlined"

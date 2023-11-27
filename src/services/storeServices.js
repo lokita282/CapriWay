@@ -8,6 +8,14 @@ export const viewAllDesigns = () => {
   })
 }
 
+export const resetPassword = (data) => {
+  return httpcommon.patch(`/accounts/set_password`, data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
 export const buyDesign = (data) => {
   return httpcommon.post(`/marketplace/design_pay/`, data, {
     headers: {

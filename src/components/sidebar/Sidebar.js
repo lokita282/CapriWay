@@ -214,8 +214,28 @@ export default function SideDrawer(props) {
                     <ListItemButton sx={listItemBtn}>
                       <ListItemIcon sx={listItemIco}>
                         <Icon
-                          icon="ion:create"
+                          icon="material-symbols:home-rounded"
                           color={url === '' ? '#375EC0' : '#6A707F'}
+                          width="30"
+                          height="30"
+                        />
+                      </ListItemIcon>
+                    </ListItemButton>
+                  </ListItem>
+                </Tooltip>
+                <Tooltip title="Add Design">
+                  <ListItem
+                    disablePadding
+                    onClick={() => navigate('/adddesign')}
+                    sx={{ display: 'block', marginTop: '20%' }}
+                  >
+                    <ListItemButton sx={listItemBtn}>
+                      <ListItemIcon sx={listItemIco}>
+                        <Icon
+                          icon="ion:create"
+                          color={
+                            url.includes('adddesign') ? '#375EC0' : '#6A707F'
+                          }
                           width="26"
                           height="26"
                         />

@@ -8,6 +8,14 @@ import httpcommon from '../httpcommon'
 //   })
 // }
 
+export const dashboardStats = () => {
+  return httpcommon.get(`/marketplace/designer_designs_details/`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
 export const postedDesigns = () => {
   return httpcommon.get(`/marketplace/upload-design/`, {
     headers: {
