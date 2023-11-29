@@ -70,7 +70,7 @@ const ViewOneDesign = () => {
                   src={design._image}
                   alt={design.title}
                   style={{ margin: 'auto' }}
-                  // width="50%"
+                  width="100%"
                 />
               </Paper>
             </Grid>
