@@ -133,171 +133,182 @@ export default function StickyHeadTable() {
   }, [state])
 
   return (
-    <Paper sx={{ width: '77%', overflow: 'hidden', margin: 'auto' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <StyledTableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </StyledTableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          {users ? (
-            <TableBody>
-              {(rowsPerPage > 0
-                ? users.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
+    <Grid
+      container
+      spacing={{ xs: 2, md: 3 }}
+      columns={{ xs: 4, sm: 8, md: 12 }}
+      sx={{paddingTop:2}}
+    >
+      <Paper sx={{ width: '77%', overflow: 'hidden', margin: 'auto' }}>
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <StyledTableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth }}
+                  >
+                    {column.label}
+                  </StyledTableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            {users ? (
+              <TableBody>
+                {(rowsPerPage > 0
+                  ? users.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                  : users
+                ).map((row) => {
+                  return (
+                    <StyledTableRow
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.code}
+                    >
+                      <StyledTableCell>
+                        {row.first_name} {row.last_name}
+                      </StyledTableCell>
+                      <StyledTableCell>{row.email}</StyledTableCell>
+                      <StyledTableCell>{row.storeName}</StyledTableCell>
+                      <StyledTableCell align="center">
+                        <Grid container alignItems="center" spacing={0}>
+                          <Grid item xs={4}>
+                            <ListItemButton
+                              sx={listItemBtn}
+                              onClick={() => {
+                                setUserId(row.id)
+                                console.log('edittttttttt')
+                                console.log(userId)
+                                handleOpenEdit()
+                              }}
+                            >
+                              <ListItemIcon sx={listItemIco}>
+                                <Icon
+                                  color={'6A707F'}
+                                  icon="ri:edit-fill"
+                                  width="28"
+                                  height="28"
+                                />
+                              </ListItemIcon>
+                            </ListItemButton>
+                          </Grid>
+                          <Grid item xs={4}>
+                            <ListItemButton
+                              sx={listItemBtn}
+                              onClick={() => {
+                                setUserId(row.id)
+                                handleOpenDelete()
+                              }}
+                            >
+                              <ListItemIcon sx={listItemIco}>
+                                <Icon
+                                  color={'6A707F'}
+                                  icon="ic:baseline-delete"
+                                  width="28"
+                                  height="28"
+                                />
+                              </ListItemIcon>
+                            </ListItemButton>
+                          </Grid>
+                          <Grid item xs={4}>
+                            <ListItemButton
+                              sx={listItemBtn}
+                              onClick={() => {
+                                setUserId(row.id)
+                                handleOpenView()
+                              }}
+                            >
+                              <ListItemIcon sx={listItemIco}>
+                                <Icon
+                                  color={'6A707F'}
+                                  icon="carbon:view-filled"
+                                  width="28"
+                                  height="28"
+                                />
+                              </ListItemIcon>
+                            </ListItemButton>
+                          </Grid>
+                        </Grid>
+                      </StyledTableCell>
+                    </StyledTableRow>
                   )
-                : users
-              ).map((row) => {
-                return (
-                  <StyledTableRow role="checkbox" tabIndex={-1} key={row.code}>
-                    <StyledTableCell>
-                      {row.first_name} {row.last_name}
-                    </StyledTableCell>
-                    <StyledTableCell>{row.email}</StyledTableCell>
-                    <StyledTableCell>{row.storeName}</StyledTableCell>
-                    <StyledTableCell align="center">
-                      <Grid container alignItems="center" spacing={0}>
-                        <Grid item xs={4}>
-                          <ListItemButton
-                            sx={listItemBtn}
-                            onClick={() => {
-                              setUserId(row.id)
-                              console.log('edittttttttt')
-                              console.log(userId)
-                              handleOpenEdit()
-                            }}
-                          >
-                            <ListItemIcon sx={listItemIco}>
-                              <Icon
-                                color={'6A707F'}
-                                icon="ri:edit-fill"
-                                width="28"
-                                height="28"
-                              />
-                            </ListItemIcon>
-                          </ListItemButton>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <ListItemButton
-                            sx={listItemBtn}
-                            onClick={() => {
-                              setUserId(row.id)
-                              handleOpenDelete()
-                            }}
-                          >
-                            <ListItemIcon sx={listItemIco}>
-                              <Icon
-                                color={'6A707F'}
-                                icon="ic:baseline-delete"
-                                width="28"
-                                height="28"
-                              />
-                            </ListItemIcon>
-                          </ListItemButton>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <ListItemButton
-                            sx={listItemBtn}
-                            onClick={() => {
-                              setUserId(row.id)
-                              handleOpenView()
-                            }}
-                          >
-                            <ListItemIcon sx={listItemIco}>
-                              <Icon
-                                color={'6A707F'}
-                                icon="carbon:view-filled"
-                                width="28"
-                                height="28"
-                              />
-                            </ListItemIcon>
-                          </ListItemButton>
-                        </Grid>
-                      </Grid>
-                    </StyledTableCell>
-                  </StyledTableRow>
-                )
-              })}
-            </TableBody>
-          ) : (
-            'Loading...'
-          )}
-        </Table>
-      </TableContainer>
-      {users ? (
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={users.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      ) : (
-        ''
-      )}
-
-      {/* Edit User Modal */}
-      <Modal
-        open={openEdit}
-        onClose={handleCloseEdit}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <EditUser
-            userId={userId}
-            handleCloseEdit={handleCloseEdit}
-            state={state}
-            setState={setState}
+                })}
+              </TableBody>
+            ) : (
+              'Loading...'
+            )}
+          </Table>
+        </TableContainer>
+        {users ? (
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={users.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
           />
-        </Box>
-      </Modal>
+        ) : (
+          ''
+        )}
 
-      {/* Delete User Modal */}
-      <Modal
-        open={openDelete}
-        onClose={handleCloseDelete}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <DeleteUser
-            userId={userId}
-            handleCloseDelete={handleCloseDelete}
-            state={state}
-            setState={setState}
-          />
-        </Box>
-      </Modal>
+        {/* Edit User Modal */}
+        <Modal
+          open={openEdit}
+          onClose={handleCloseEdit}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <EditUser
+              userId={userId}
+              handleCloseEdit={handleCloseEdit}
+              state={state}
+              setState={setState}
+            />
+          </Box>
+        </Modal>
 
-      {/* View User Modal */}
-      <Modal
-        open={openView}
-        onClose={handleCloseView}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <ViewUser
-            userId={userId}
-            handleCloseView={handleCloseView}
-            state={state}
-            setState={setState}
-          />
-        </Box>
-      </Modal>
-    </Paper>
+        {/* Delete User Modal */}
+        <Modal
+          open={openDelete}
+          onClose={handleCloseDelete}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <DeleteUser
+              userId={userId}
+              handleCloseDelete={handleCloseDelete}
+              state={state}
+              setState={setState}
+            />
+          </Box>
+        </Modal>
+
+        {/* View User Modal */}
+        <Modal
+          open={openView}
+          onClose={handleCloseView}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <ViewUser
+              userId={userId}
+              handleCloseView={handleCloseView}
+              state={state}
+              setState={setState}
+            />
+          </Box>
+        </Modal>
+      </Paper>
+    </Grid>
   )
 }

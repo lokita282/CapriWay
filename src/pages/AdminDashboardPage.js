@@ -142,14 +142,17 @@ const AdminDashboardPage = () => {
   return (
     <Grid
       container
-      spacing={2}
+      spacing={{ xs: 2, md: 3 }}
+      columns={{ xs: 4, sm: 8, md: 12 }}
       sx={{ height: '80vh', padding: '0', margin: '0' }}
     >
       <Grid item xs={12}>
-        <Typography variant="h4" color="initial">
-          Hi, {user}
+        <Typography variant="h4" style={styles.gradientText} color="initial">
+          <b>Hi, {user} </b>
         </Typography>
-        <Typography variant="body1" color="initial">View all designs here</Typography>
+        <Typography variant="h6" style={styles.gradientText}  color="initial">
+          View all designs here
+        </Typography>
         <Typography variant="body1" color="initial"></Typography>
       </Grid>
       {designs
@@ -181,15 +184,15 @@ const AdminDashboardPage = () => {
                           <Typography variant="body1" color="initial">
                             Rs. {design.price}
                           </Typography>
-                          <IconButton
+                          {/* <IconButton
                             aria-label="add to favorites"
                             sx={{ marginLeft: 'auto' }}
                           >
                             <FavoriteIcon />
-                          </IconButton>
-                          <Typography variant="body1" color="initial">
+                          </IconButton> */}
+                          {/* <Typography variant="body1" color="initial">
                             {design.likes_count}
-                          </Typography>
+                          </Typography> */}
                         </CardActions>
                       </CardContent>
                     ) : (
@@ -206,7 +209,7 @@ const AdminDashboardPage = () => {
                           <Typography variant="body1" color="initial">
                             Rs. {design.price}
                           </Typography>
-                          <IconButton
+                          {/* <IconButton
                             aria-label="add to favorites"
                             sx={{ marginLeft: 'auto' }}
                           >
@@ -214,7 +217,7 @@ const AdminDashboardPage = () => {
                           </IconButton>
                           <Typography variant="body1" color="initial">
                             {design.likes_count}
-                          </Typography>
+                          </Typography> */}
                         </CardActions>
                       </CardContent>
                     )}

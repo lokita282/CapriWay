@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from 'react'
+import { React, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import SideDrawer from '../../components/sidebar/Sidebar'
 import {
@@ -13,13 +13,23 @@ import {
   CardMedia,
   CardContent,
   Avatar,
-  Chip
+  Chip,
 } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import { red } from '@mui/material/colors'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { Icon } from '@iconify/react'
-import {getUnapprovedDesignsOfDesigner} from '../../services/adminServices'
+import { getUnapprovedDesignsOfDesigner } from '../../services/adminServices'
+
+const styles = {
+  gradientText: {
+    background: 'radial-gradient( #7E8AFF, #375EC0)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    fontFamily: 'Poppins',
+    padding: '15px 0px',
+  },
+}
 
 const Btn = ({ display, id }) => {
   const navigate = useNavigate()
@@ -69,17 +79,23 @@ const DesignerUnapproved = () => {
         console.log(error)
       }
     }
-    func() 
+    func()
   }, [])
-  
+
   const navigate = useNavigate()
   return (
     <SideDrawer>
       <Grid
         container
-        spacing={2}
-        sx={{ height: '80vh', padding: '0', margin: '0' }}
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+        // sx={{ height: '80vh', padding: '0', margin: '0' }}
       >
+        <Grid item xs={12}>
+          <Typography variant="h5" color="initial" style={styles.gradientText}>
+            <b>Unapproved designs:</b>
+          </Typography>
+        </Grid>
         {/* <Paper sx={{ padding: 3, borderRadius: 3, marginBottom: 2 }}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
@@ -147,12 +163,12 @@ const DesignerUnapproved = () => {
                             />
                           </Box>
                           <CardActions>
-                            <IconButton aria-label="add to favorites">
+                            {/* <IconButton aria-label="add to favorites">
                               <FavoriteIcon />
-                            </IconButton>
-                            <Typography variant="body1" color="initial">
+                            </IconButton> */}
+                            {/* <Typography variant="body1" color="initial">
                               {design.likes}
-                            </Typography>
+                            </Typography> */}
                             <Grid item xs={10.5}>
                               {design.tags.tags.tags
                                 ? design.tags.tags.tags.map((tag) => {
@@ -195,12 +211,12 @@ const DesignerUnapproved = () => {
                             />
                           </Box>
                           <CardActions>
-                            <IconButton aria-label="add to favorites">
+                            {/* <IconButton aria-label="add to favorites">
                               <FavoriteIcon />
-                            </IconButton>
-                            <Typography variant="body1" color="initial">
+                            </IconButton> */}
+                            {/* <Typography variant="body1" color="initial">
                               {design.likes}
-                            </Typography>
+                            </Typography> */}
                             <Grid item xs={10.5}>
                               {design.tags.tags.tags
                                 ? design.tags.tags.tags.map((tag) => {

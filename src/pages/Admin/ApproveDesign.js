@@ -10,7 +10,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: '40%',
   bgcolor: 'background.paper',
   p: 4,
   borderRadius: 5,
@@ -49,7 +49,11 @@ const ApproveDesign = () => {
 
   return (
     <SideDrawer>
-      <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
         {data ? (
           <Grid item xs={12}>
             <Paper
@@ -63,7 +67,11 @@ const ApproveDesign = () => {
             {data.users.map((user) => {
               return (
                 <Paper sx={{ padding: 3, borderRadius: 3, marginBottom: 2 }}>
-                  <Grid container spacing={2}>
+                  <Grid
+                    container
+                    spacing={{ xs: 2, md: 3 }}
+                    columns={{ xs: 4, sm: 8, md: 12 }}
+                  >
                     <Grid item xs={6}>
                       <Typography variant="body1" color="initial">
                         Name: {user.name}

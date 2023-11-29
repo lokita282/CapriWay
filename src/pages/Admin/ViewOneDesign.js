@@ -41,34 +41,53 @@ const ViewOneDesign = () => {
   
   return (
     <SideDrawer>
-      <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
         {design ? (
           <>
             <Grid item xs={12}>
               <Paper sx={{ padding: 3, borderRadius: 3 }}>
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
-                    <Typography variant="body1" color="initial">Name: {design.uploaderName}</Typography>
+                    <Typography variant="body1" color="initial">
+                      Name: {design.uploaderName}
+                    </Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="body1" color="initial" align="right">Likes: {design.likes_count} </Typography>
+                    <Typography variant="body1" color="initial" align="right">
+                      Likes: {design.likes_count}{' '}
+                    </Typography>
                   </Grid>
                 </Grid>
               </Paper>
             </Grid>
             <Grid item xs={6} alignItems="center">
               <Paper sx={{ padding: 3, borderRadius: 3, minHeight: '100%' }}>
-                <img src={design._image} alt={design.title} style={{margin: 'auto'}} />
+                <img
+                  src={design._image}
+                  alt={design.title}
+                  style={{ margin: 'auto' }}
+                  // width="50%"
+                />
               </Paper>
             </Grid>
             <Grid item xs={6}>
               <Paper sx={{ padding: 3, borderRadius: 3 }}>
-                <Typography variant="h5" color="initial" align="center"><b>{design.title}</b></Typography>
-                <Typography variant="body1" color="initial">{design.description}</Typography>
-                <Box textAlign='center'>
-                <Button variant="contained" color="primary" align="center">
-                 <Link sx={link} href={design.asset}>Download</Link>
-                </Button>
+                <Typography variant="h5" color="initial" align="center">
+                  <b>{design.title}</b>
+                </Typography>
+                <Typography variant="body1" color="initial">
+                  {design.description}
+                </Typography>
+                <Box textAlign="center">
+                  <Button variant="contained" color="primary" align="center">
+                    <Link sx={link} href={design.asset}>
+                      Download
+                    </Link>
+                  </Button>
                 </Box>
               </Paper>
             </Grid>

@@ -131,174 +131,193 @@ const PostedDesigns = () => {
 
   return (
     <>
-    <Grid container spacing={2}>
-      {designs
-        ? designs.map((design) => {
-            return (
-              <>
-                <Grid item xs={4}>
-                  <Card
-                    sx={{ maxWidth: 345 }}
-                    onMouseOver={handleMouseOver}
-                    onMouseOut={handleMouseOut}
-                  >
-                    {design.isPremium ? (
-                      <CardMedia
-                        sx={{ height: 140 }}
-                        image={design._image}
-                        title={design.title}
-                        style={{
-                          filter: 'blur(5px)',
-                          '-webkitFilter': 'blur(5px)',
-                          '-moz-filter': 'blur(5px)',
-                          '-o-filter': 'blur(5px)',
-                          '-ms-filter': 'blur(5px)',
-                        }}
-                      />
-                    ) : (
-                      <CardMedia
-                        sx={{ height: 140 }}
-                        image={design._image}
-                        title={design.title}
-                      />
-                    )}
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {design.title}
-                      </Typography>
-                      <Grid container spacing={2}>
-                        <Grid item xs={10.5}>
-                          {design.tags.tags.tags
-                            ? design.tags.tags.tags.map((tag) => {
-                                return (
-                                  <Chip
-                                    label={tag}
-                                    sx={{ marginRight: '1em' }}
-                                  />
-                                )
-                              })
-                            : 'Loading...'}
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
+        {designs
+          ? designs.map((design) => {
+              return (
+                <>
+                  <Grid item xs={4}>
+                    <Card
+                      sx={{ maxWidth: 345 }}
+                      onMouseOver={handleMouseOver}
+                      onMouseOut={handleMouseOut}
+                    >
+                      {design.isPremium ? (
+                        <CardMedia
+                          sx={{ height: 140 }}
+                          image={design._image}
+                          title={design.title}
+                          style={{
+                            filter: 'blur(5px)',
+                            '-webkitFilter': 'blur(5px)',
+                            '-moz-filter': 'blur(5px)',
+                            '-o-filter': 'blur(5px)',
+                            '-ms-filter': 'blur(5px)',
+                          }}
+                        />
+                      ) : (
+                        <CardMedia
+                          sx={{ height: 140 }}
+                          image={design._image}
+                          title={design.title}
+                        />
+                      )}
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {design.title}
+                        </Typography>
+                        <Grid
+                          container
+                          spacing={{ xs: 2, md: 3 }}
+                          columns={{ xs: 4, sm: 8, md: 12 }}
+                        >
+                          <Grid item xs={10.5}>
+                            {design.tags.tags.tags
+                              ? design.tags.tags.tags.map((tag) => {
+                                  return (
+                                    <Chip
+                                      label={tag}
+                                      sx={{ marginRight: '1em' }}
+                                    />
+                                  )
+                                })
+                              : 'Loading...'}
+                          </Grid>
+                          <Grid item xs={1.5}>
+                            {design.isPremium === true ? (
+                              <Icon
+                                icon="fa6-solid:crown"
+                                color="#FCEA2B"
+                                width="26"
+                                height="26"
+                                style={{ stroke: 'black', strokeWidth: '5' }}
+                              />
+                            ) : (
+                              ''
+                            )}
+                          </Grid>
                         </Grid>
-                        <Grid item xs={1.5}>
-                          {design.isPremium === true ? (
-                            <Icon
-                              icon="fa6-solid:crown"
-                              color="#FCEA2B"
-                              width="26"
-                              height="26"
-                              style={{ stroke: 'black', strokeWidth: '5' }}
-                            />
-                          ) : (
-                            ''
-                          )}
-                        </Grid>
-                      </Grid>
-                    </CardContent>
-                    {isHovered ? (
-                      <CardActions>
-                        <Grid item xs={1}>
-                          <IconButton aria-label="add to favorites" onClick={() => handleLike(design.design_id)}>
-                            {design.status? (<FavoriteIcon sx={{color: '#E8425B'}}/>) : (<FavoriteIcon />)}
-                          </IconButton>
-                        </Grid>
-                        <Grid item xs={1}>
-                          <Typography variant="body1" color="initial">
-                            {design.likes_count}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Typography variant="body1" color="initial">
-                            Rs. {design.price}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={5}>
-                          {design.isPremium ? (
-                            <Button
-                              sx={{ float: 'right', marginRight: '0.4em' }}
-                              variant="contained"
-                              onMouseEnter={() => {
-                                handleSetData(design)
-                              }}
-                              onClick={() => {
-                                displayRazorpay()
-                              }}
+                      </CardContent>
+                      {isHovered ? (
+                        <CardActions>
+                          <Grid item xs={1}>
+                            <IconButton
+                              aria-label="add to favorites"
+                              onClick={() => handleLike(design.design_id)}
                             >
-                              Buy
-                            </Button>
-                          ) : (
+                              {design.status ? (
+                                <FavoriteIcon sx={{ color: '#E8425B' }} />
+                              ) : (
+                                <FavoriteIcon />
+                              )}
+                            </IconButton>
+                          </Grid>
+                          <Grid item xs={1}>
+                            <Typography variant="body1" color="initial">
+                              {design.likes_count}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Typography variant="body1" color="initial">
+                              Rs. {design.price}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={5}>
+                            {design.isPremium ? (
+                              <Button
+                                sx={{ float: 'right', marginRight: '0.4em' }}
+                                variant="contained"
+                                onMouseEnter={() => {
+                                  handleSetData(design)
+                                }}
+                                onClick={() => {
+                                  displayRazorpay()
+                                }}
+                              >
+                                Buy
+                              </Button>
+                            ) : (
+                              <Button
+                                sx={{ float: 'right', marginRight: '0.4em' }}
+                                variant="contained"
+                              >
+                                <Link sx={link} href={design.asset}>
+                                  Download
+                                </Link>
+                              </Button>
+                            )}
+                          </Grid>
+                          <Grid item xs={3}>
                             <Button
-                              sx={{ float: 'right', marginRight: '0.4em' }}
                               variant="contained"
+                              color="primary"
+                              onClick={() =>
+                                navigate(`/design/${design.design_id}`)
+                              }
                             >
-                              <Link sx={link} href={design.asset}>
-                                Download
-                              </Link>
+                              View
                             </Button>
-                          )}
-                        </Grid>
-                        <Grid item xs={3}>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() =>
-                              navigate(`/design/${design.design_id}`)
-                            }
-                          >
-                            View
-                          </Button>
-                        </Grid>
-                      </CardActions>
-                    ) : (
-                      <CardActions>
-                        <Grid item xs={1}>
-                          <IconButton aria-label="add to favorites">
-                             {design.status ? (<FavoriteIcon sx={{color: '#E8425B'}}/>) : (<FavoriteIcon />)}
-                          </IconButton>
-                        </Grid>
-                        <Grid item xs={1}>
-                          <Typography variant="body1" color="initial">
-                            {design.likes_count}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Typography variant="body1" color="initial">
-                            Rs. {design.price}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={4}>
-                          {design.isPremium ? (
-                            <Button
-                              sx={{ float: 'right', marginRight: '0.4em' }}
-                              variant="contained"
-                              onMouseEnter={() => {
-                                handleSetData(design)
-                              }}
-                              onClick={() => {
-                                displayRazorpay()
-                              }}
-                            >
-                              Buy
-                            </Button>
-                          ) : (
-                            <Button
-                              sx={{ float: 'right', marginRight: '0.4em' }}
-                              variant="contained"
-                            >
-                              <Link sx={link} href={design.asset}>
-                                Download
-                              </Link>
-                            </Button>
-                          )}
-                        </Grid>
-                      </CardActions>
-                    )}
-                  </Card>
-                </Grid>
-              </>
-            )
-          })
-        : 'Loading...'}
-    </Grid>
+                          </Grid>
+                        </CardActions>
+                      ) : (
+                        <CardActions>
+                          <Grid item xs={1}>
+                            <IconButton aria-label="add to favorites">
+                              {design.status ? (
+                                <FavoriteIcon sx={{ color: '#E8425B' }} />
+                              ) : (
+                                <FavoriteIcon />
+                              )}
+                            </IconButton>
+                          </Grid>
+                          <Grid item xs={1}>
+                            <Typography variant="body1" color="initial">
+                              {design.likes_count}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Typography variant="body1" color="initial">
+                              Rs. {design.price}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={4}>
+                            {design.isPremium ? (
+                              <Button
+                                sx={{ float: 'right', marginRight: '0.4em' }}
+                                variant="contained"
+                                onMouseEnter={() => {
+                                  handleSetData(design)
+                                }}
+                                onClick={() => {
+                                  displayRazorpay()
+                                }}
+                              >
+                                Buy
+                              </Button>
+                            ) : (
+                              <Button
+                                sx={{ float: 'right', marginRight: '0.4em' }}
+                                variant="contained"
+                              >
+                                <Link sx={link} href={design.asset}>
+                                  Download
+                                </Link>
+                              </Button>
+                            )}
+                          </Grid>
+                        </CardActions>
+                      )}
+                    </Card>
+                  </Grid>
+                </>
+              )
+            })
+          : 'Loading...'}
+      </Grid>
     </>
   )
 }

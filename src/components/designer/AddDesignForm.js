@@ -141,7 +141,12 @@ const AddUserForm = () => {
         <Typography variant="h6" style={styles.gradientText}>
           <b>Upload Design</b>
         </Typography>
-        <Grid container spacing={2} style={styles.gridContainer}>
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+          style={styles.gridContainer}
+        >
           <Grid item xs={6}>
             <TextField
               id="title"
@@ -175,7 +180,7 @@ const AddUserForm = () => {
               name="description"
               variant="outlined"
               fullWidth
-              multiline 
+              multiline
               onChange={handleChangeDescription}
             />
           </Grid>

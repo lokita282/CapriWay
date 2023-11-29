@@ -13,7 +13,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
+  width: '40%',
   bgcolor: 'background.paper',
   p: 4,
   borderRadius: 5,
@@ -128,7 +128,11 @@ const ApproveSingleDesign = () => {
     <SideDrawer>
       {design ? (
         <>
-          <Grid container spacing={2}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
             {/* <Grid item xs={12}>
               <Paper sx={{ padding: 3, borderRadius: 3 }}>
                 <Grid container spacing={2}>
@@ -143,7 +147,7 @@ const ApproveSingleDesign = () => {
             </Grid> */}
             <Grid item xs={6}>
               <Paper sx={{ padding: 3, borderRadius: 3, minHeight: '100%' }}>
-                <img src={design._image} alt={design.title} />
+                <img src={design._image} alt={design.title} width="100%" />
               </Paper>
             </Grid>
             <Grid item xs={6}>
@@ -231,7 +235,11 @@ const ApproveSingleDesign = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Grid container spacing={2}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
             <Grid item xs={12}>
               <Typography variant="h5" color="initial" align="center">
                 Approve Design
@@ -250,13 +258,14 @@ const ApproveSingleDesign = () => {
                 type="number"
                 // value=''
                 onChange={handleChange}
+                // fullwidth
               />
             </Grid>
-            <Grid item xs={12} align="right" sx={{ marginRight: 2 }}>
+            <Grid item xs={12} align="center">
               <Button
                 variant="outlined"
                 color="primary"
-                sx={{ marginRight: 2 }}
+                sx={{ margin: 2 }}
                 onClick={handleCloseApprove}
               >
                 Cancel
@@ -287,18 +296,22 @@ const ApproveSingleDesign = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Grid container spacing={2}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
             <Grid item xs={12}>
               <Typography variant="h5" color="initial" align="center">
                 Approve Design
               </Typography>
             </Grid>
 
-            <Grid item xs={12} align="right" sx={{ marginRight: 2 }}>
+            <Grid item xs={12} align="center">
               <Button
                 variant="outlined"
                 color="primary"
-                sx={{ marginRight: 2 }}
+                sx={{ margin: 2 }}
                 onClick={handleCloseApproveFree}
               >
                 Cancel
@@ -329,7 +342,11 @@ const ApproveSingleDesign = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Grid container spacing={2}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
             <Grid item xs={12}>
               <Typography variant="h5" color="initial" align="center">
                 Reject Design
@@ -341,11 +358,11 @@ const ApproveSingleDesign = () => {
                 Are you sure you want to reject this design?
               </Typography>
             </Grid>
-            <Grid item xs={12} align="right" sx={{ marginRight: 2 }}>
+            <Grid item xs={12} align="center">
               <Button
                 variant="outlined"
                 color="primary"
-                sx={{ marginRight: 2 }}
+                sx={{ margin: 2 }}
                 onClick={handleCloseReject}
               >
                 Cancel

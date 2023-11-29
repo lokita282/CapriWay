@@ -17,7 +17,15 @@ import {
 import Fuse from 'fuzzy-search'
 import { df_jc_ac, textField } from '../../theme/CssMy'
 
-const columns = ['title', 'tags']
+const styles = {
+  gradientText: {
+    background: 'radial-gradient( #7E8AFF, #375EC0)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    fontFamily: 'Poppins',
+    padding: '15px 0px',
+  },
+}
 
 const PostedDesigns = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -58,7 +66,16 @@ const PostedDesigns = () => {
 
   return (
     <SideDrawer>
-      <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
+        <Grid item xs={12}>
+          <Typography style={styles.gradientText} variant="h4" color="initial">
+            <b>View all posted designs</b>
+          </Typography>
+        </Grid>
         {filteredData.length ? (
           <>
             {/* <Grid item xs={12}>

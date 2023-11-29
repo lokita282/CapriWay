@@ -5,6 +5,16 @@ import successHandler from '../components/toasts/successHandler'
 import errorHandler from '../components/toasts/errorHandler'
 import {buySubscription, paymentConfirmationSubscription, resetPassword} from '../services/storeServices'
 
+const styles = {
+  gradientText: {
+    background: 'radial-gradient( #7E8AFF, #375EC0)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    fontFamily: 'Poppins',
+    padding: '15px 0px',
+  },
+}
+
 const StoreDashboardPage = () => {
   const user = JSON.parse(localStorage.getItem('capriwayUsername'))
   const isPaid = JSON.parse(localStorage.getItem('capriwayPaidUser'))
@@ -88,10 +98,15 @@ const StoreDashboardPage = () => {
 
   return (
     <>
-      <Grid container spacing={2} sx={{ marginBottom: '1em' }}>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+        sx={{ marginBottom: '1em' }}
+      >
         <Grid item xs={12}>
-          <Typography variant="h4" color="initial">
-            Hi, {user}
+          <Typography style={styles.gradientText} variant="h4" color="initial">
+            <b> Hi, {user}</b>
           </Typography>
         </Grid>
       </Grid>
@@ -100,7 +115,7 @@ const StoreDashboardPage = () => {
           <>
             <Grid container spacing={2} sx={{ marginBottom: '1em' }}>
               <Grid item xs={12}>
-                <Typography variant="body1" color="initial">
+                <Typography style={styles.gradientText} variant="h6" color="initial">
                   View all designs here
                 </Typography>
               </Grid>
@@ -111,7 +126,11 @@ const StoreDashboardPage = () => {
           </>
         ) : (
           <>
-            <Grid container spacing={2}>
+            <Grid
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 4, sm: 8, md: 12 }}
+            >
               <Grid item xs={12}>
                 <Typography variant="h6" color="initial">
                   Before proceeding, please reset your password

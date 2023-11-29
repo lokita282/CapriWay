@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from 'react'
-import {Grid, Typography, Paper} from '@mui/material'
+import {Grid, Typography, Paper, Box} from '@mui/material'
 import designer from '../images/designerdash.png' 
 import chest from '../images/chest.png' 
 import sold from '../images/sold.png' 
@@ -65,174 +65,181 @@ const DesignerDashboardPage = () => {
 
   return (
     <>
-      <Grid container spacing={4} sx={{ marginBottom: '1em' }}>
-        {data ? (
-          <>
-            <Grid item xs={7}>
-              <Paper style={styles.paperContainer}>
-                <Grid
-                  container
-                  spacing={2}
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Grid item xs={7}>
-                    <Typography
-                      variant="h3"
-                      color="initial"
-                      style={styles.gradientText}
-                    >
-                      <b> Hi, {user} </b>
-                    </Typography>
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+          sx={{ marginBottom: '1em' }}
+        >
+          {data ? (
+            <>
+              <Grid item xs={7} md={6}>
+                <Paper style={styles.paperContainer}>
+                  <Grid
+                    container
+                    spacing={2}
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Grid item xs={7} md={6}>
+                      <Typography
+                        variant="h3"
+                        color="initial"
+                        style={styles.gradientText}
+                      >
+                        <b> Hi, {user} </b>
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={5} md={6} justifyContent="center">
+                      <img src={designer} alt="designer" width="100%" />
+                    </Grid>
                   </Grid>
-                  <Grid item xs={5} justifyContent="center">
-                    <img src={designer} alt="designer" width="100%" />
+                </Paper>
+              </Grid>
+              <Grid item xs={5} md={6}>
+                <Paper style={styles.paperContainer}>
+                  <Grid
+                    container
+                    spacing={2}
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Grid item xs={6} md={6}>
+                      <img src={chest} width="100%" alt="chest" />
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                      <Typography
+                        variant="h4"
+                        color="initial"
+                        style={styles.gradientText2}
+                        align="center"
+                      >
+                        <b> {data.total_designs} </b>
+                      </Typography>
+                      <Typography
+                        variant="h6"
+                        color="#aeaeae"
+                        // style={styles.gradientText2}
+                        align="center"
+                      >
+                        <b> Total designs </b>
+                      </Typography>
+                    </Grid>
                   </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-            <Grid item xs={5}>
-              <Paper style={styles.paperContainer}>
-                <Grid
-                  container
-                  spacing={2}
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Grid item xs={6}>
-                    <img src={chest} width="100%" alt="chest" />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography
-                      variant="h4"
-                      color="initial"
-                      style={styles.gradientText2}
-                      align="center"
-                    >
-                      <b> {data.total_designs} </b>
-                    </Typography>
-                    <Typography
-                      variant="h6"
-                      color="#aeaeae"
-                      // style={styles.gradientText2}
-                      align="center"
-                    >
-                      <b> Total designs </b>
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-            <Grid item xs={2.4}>
-              <Paper style={styles.paperContainer}>
-                <img src={approve} width="80%" alt="chest" />
-                <Typography
-                  variant="h4"
-                  color="initial"
-                  style={styles.gradientText2}
-                  align="center"
-                >
-                  <b>{data.total_approved} </b>
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="#aeaeae"
-                  // style={styles.gradientText2}
-                  align="center"
-                >
-                  <b> Approved </b>
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={2.4}>
-              <Paper style={styles.paperContainer}>
-                <img src={pending} width="80%" alt="chest" />
-                <Typography
-                  variant="h4"
-                  color="initial"
-                  style={styles.gradientText2}
-                  align="center"
-                >
-                  <b>{data.total_unapproved} </b>
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="#aeaeae"
-                  // style={styles.gradientText2}
-                  align="center"
-                >
-                  <b> Unapproved </b>
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={2.4}>
-              <Paper style={styles.paperContainer}>
-                <img src={reject} width="80%" alt="chest" />
-                <Typography
-                  variant="h4"
-                  color="initial"
-                  style={styles.gradientText2}
-                  align="center"
-                >
-                  <b>{data.total_rejected} </b>
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="#aeaeae"
-                  // style={styles.gradientText2}
-                  align="center"
-                >
-                  <b> Rejected </b>
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={2.4}>
-              <Paper style={styles.paperContainer}>
-                <img src={sold} width="80%" alt="chest" />
-                <Typography
-                  variant="h4"
-                  color="initial"
-                  style={styles.gradientText2}
-                  align="center"
-                >
-                  <b>{data.total_sold} </b>
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="#aeaeae"
-                  // style={styles.gradientText2}
-                  align="center"
-                >
-                  <b> Sold </b>
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={2.4}>
-              <Paper style={styles.paperContainer}>
-                <img src={unsold} width="80%" alt="chest" />
-                <Typography
-                  variant="h4"
-                  color="initial"
-                  style={styles.gradientText2}
-                  align="center"
-                >
-                  <b>{data.total_unsold} </b>
-                </Typography>
-                <Typography
-                  variant="h6"
-                  color="#aeaeae"
-                  // style={styles.gradientText2}
-                  align="center"
-                >
-                  <b> Unsold </b>
-                </Typography>
-              </Paper>
-            </Grid>
-          </>
-        ) : (
-          'Loading...'
-        )}
-      </Grid>
+                </Paper>
+              </Grid>
+              <Grid item xs={2.4} md={2.4}>
+                <Paper style={styles.paperContainer}>
+                  <img src={approve} width="80%" alt="chest" />
+                  <Typography
+                    variant="h4"
+                    color="initial"
+                    style={styles.gradientText2}
+                    align="center"
+                  >
+                    <b>{data.total_approved} </b>
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="#aeaeae"
+                    // style={styles.gradientText2}
+                    align="center"
+                  >
+                    <b> Approved </b>
+                  </Typography>
+                </Paper>
+              </Grid>
+              <Grid item xs={2.4} md={2.4}>
+                <Paper style={styles.paperContainer}>
+                  <img src={pending} width="80%" alt="chest" />
+                  <Typography
+                    variant="h4"
+                    color="initial"
+                    style={styles.gradientText2}
+                    align="center"
+                  >
+                    <b>{data.total_unapproved} </b>
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="#aeaeae"
+                    // style={styles.gradientText2}
+                    align="center"
+                  >
+                    <b> Unapproved </b>
+                  </Typography>
+                </Paper>
+              </Grid>
+              <Grid item xs={2.4} md={2.4}>
+                <Paper style={styles.paperContainer}>
+                  <img src={reject} width="80%" alt="chest" />
+                  <Typography
+                    variant="h4"
+                    color="initial"
+                    style={styles.gradientText2}
+                    align="center"
+                  >
+                    <b>{data.total_rejected} </b>
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="#aeaeae"
+                    // style={styles.gradientText2}
+                    align="center"
+                  >
+                    <b> Rejected </b>
+                  </Typography>
+                </Paper>
+              </Grid>
+              <Grid item xs={2.4} md={2.4}>
+                <Paper style={styles.paperContainer}>
+                  <img src={sold} width="80%" alt="chest" />
+                  <Typography
+                    variant="h4"
+                    color="initial"
+                    style={styles.gradientText2}
+                    align="center"
+                  >
+                    <b>{data.total_sold} </b>
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="#aeaeae"
+                    // style={styles.gradientText2}
+                    align="center"
+                  >
+                    <b> Sold </b>
+                  </Typography>
+                </Paper>
+              </Grid>
+              <Grid item xs={2.4} md={2.4}>
+                <Paper style={styles.paperContainer}>
+                  <img src={unsold} width="80%" alt="chest" />
+                  <Typography
+                    variant="h4"
+                    color="initial"
+                    style={styles.gradientText2}
+                    align="center"
+                  >
+                    <b>{data.total_unsold} </b>
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="#aeaeae"
+                    // style={styles.gradientText2}
+                    align="center"
+                  >
+                    <b> Unsold </b>
+                  </Typography>
+                </Paper>
+              </Grid>
+            </>
+          ) : (
+            <Typography variant="body1" color="initial" sx={{ padding: '1em' }}>
+              Loading...
+            </Typography>
+          )}
+        </Grid>
     </>
   )
 }
