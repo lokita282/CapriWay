@@ -98,7 +98,7 @@ const AddUserForm = () => {
 
     axios
       .post(
-        'https://sarthakbhan.pythonanywhere.com/marketplace/upload-design/',
+        'https://649a-2405-201-6-41fd-1854-edd6-954d-a719.ngrok-free.app/marketplace/upload-design/',
         formdata,
         {
           headers: {
@@ -121,7 +121,8 @@ const AddUserForm = () => {
 
     const handleUploadImage = (e) => {
       console.log(e.target.files[0])
-      setImage(e.target.files[0])
+      console.log(e.target.files)
+      setImage(e.target.files)
      }
 
     const handleUploadAssets = (e) => {
@@ -165,7 +166,7 @@ const AddUserForm = () => {
             Upload Image:
           </Grid>
           <Grid item xs={4.5} sx={{ paddingBottom: '20px' }}>
-            <TextField id="file" onChange={handleUploadImage} type="file" />
+            <TextField id="file" onChange={handleUploadImage} type="file" inputProps={{multiple: true}}/>
           </Grid>
           <Grid item xs={1.5}>
             Upload Assets:
