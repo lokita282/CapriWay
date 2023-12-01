@@ -1,6 +1,8 @@
 import {React, useState, useEffect} from 'react'
 import { styled } from '@mui/material/styles'
 import {Grid, Typography, Card, CardHeader, Avatar, CardMedia, CardContent, CardActions, Button, Box, CardActionArea} from '@mui/material'
+import Carousel from 'react-material-ui-carousel'
+
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { useNavigate } from 'react-router'
@@ -106,6 +108,8 @@ const Btn = ({ display, id }) => {
 
 
 const AdminDashboardPage = () => {
+  const navigate = useNavigate()
+
   const [expanded, setExpanded] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [display, setDisplay] = useState('notdisplayed')
@@ -160,27 +164,46 @@ const AdminDashboardPage = () => {
             return (
               <Grid item xs={4}>
                 <Card
-                  sx={{ maxWidth: 345 }}
+                  sx={{ maxWidth: 345, height: 450 }}
                   onMouseOver={handleMouseOver}
                   onMouseOut={handleMouseOut}
+                  onClick={() => {
+                    navigate(`/design/${design.design_id}`)
+                  }}
                 >
                   <CardHeader
                     title={design.title}
                     subheader={design.isPremium ? 'Premium' : 'Free'}
                   />
                   <CardActionArea>
-                    {isHovered ? (
                       <CardContent sx={{ minHeight: '220px' }}>
                         <Box ml={2}>
                           <CardMedia
-                            component="img"
-                            height="194"
+                            // component="img"
+                            sx={{ height: 290 }}
                             image={design._image}
-                            alt={design.title}
-                          />
+                            title={design.title}
+                          >
+                            <Carousel
+                              autoPlay={true}
+                              swipe={true}
+                              indicators={false}
+                              cycleNavigation={true}
+                              interval={5000}
+                              animation="fade"
+                            >
+                              {design.items.map((item, i) => (
+                                <Item
+                                  key={i}
+                                  item={item}
+                                  i={i === 0 ? true : false}
+                                />
+                              ))}
+                            </Carousel>
+                          </CardMedia>
                         </Box>
                         <CardActions>
-                          <Btn display={display} id={design.design_id} />
+                          {/* <Btn display={display} id={design.design_id} /> */}
                           <Typography variant="body1" color="initial">
                             Rs. {design.price}
                           </Typography>
@@ -195,32 +218,7 @@ const AdminDashboardPage = () => {
                           </Typography> */}
                         </CardActions>
                       </CardContent>
-                    ) : (
-                      <CardContent sx={{ minHeight: '220px' }}>
-                        <Box ml={2}>
-                          <CardMedia
-                            component="img"
-                            height="194"
-                            image={design._image}
-                            alt={design.title}
-                          />
-                        </Box>
-                        <CardActions>
-                          <Typography variant="body1" color="initial">
-                            Rs. {design.price}
-                          </Typography>
-                          {/* <IconButton
-                            aria-label="add to favorites"
-                            sx={{ marginLeft: 'auto' }}
-                          >
-                            <FavoriteIcon />
-                          </IconButton>
-                          <Typography variant="body1" color="initial">
-                            {design.likes_count}
-                          </Typography> */}
-                        </CardActions>
-                      </CardContent>
-                    )}
+                    {/* )} */}
                   </CardActionArea>
                   {/* <CardActions disableSpacing>
             <IconButton aria-label="add to favorites">
@@ -234,6 +232,36 @@ const AdminDashboardPage = () => {
           })
         : 'Loading...'}
     </Grid>
+  )
+}
+
+function Item(props) {
+  return (
+    <>
+      <Box
+        sx={{
+          // margin: 0,
+          // padding: 0,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        alignItems="center"
+        justify="center"
+        // backgroundColor="#cccccc"
+      >
+        {/* <CardMedia
+          component="img"
+          
+          // sx={{ height: '100vh' }}
+        /> */}
+        <img
+          src={props.item.img}
+          width="90%"
+          alt=""
+          style={{ marginLeft: 'auto', marginRight: 'auto', display: 'block' }}
+        />
+      </Box>
+    </>
   )
 }
 

@@ -21,6 +21,15 @@ import { df_jc_ac, textField, link } from '../../theme/CssMy'
 
 const columns = ['title', 'tags']
 
+const styles = {
+  gradientText: {
+    background: 'radial-gradient( #7E8AFF, #375EC0)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    fontFamily: 'Poppins',
+    padding: '15px 0px',
+  }}
+
 const ViewPurchased = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [designs, setDesigns] = useState()
@@ -64,6 +73,11 @@ const ViewPurchased = () => {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
+        <Grid item xs={12}>
+          <Typography style={styles.gradientText} variant="h6" color="initial">
+            View purchased designs here
+          </Typography>
+        </Grid>
         {filteredData.length ? (
           <>
             {/* <Grid item xs={12}>

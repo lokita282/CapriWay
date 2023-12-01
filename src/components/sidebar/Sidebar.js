@@ -76,6 +76,8 @@ const gridcon = {
   flexDirection: 'column',
   height: '100vh',
   justifyContent: 'space-between',
+  backgroundColor: '#375EC0',
+  width: '110%'
 }
 
 export default function SideDrawer(props) {
@@ -130,7 +132,7 @@ export default function SideDrawer(props) {
                       <ListItemIcon sx={listItemIco}>
                         <Icon
                           icon="mdi:brush"
-                          color={url === '' ? '#375EC0' : '#6A707F'}
+                          color={url === '' ? '#ffffff' : '#aeaeae'}
                           width="30"
                           height="30"
                         />
@@ -148,7 +150,7 @@ export default function SideDrawer(props) {
                       <ListItemIcon sx={listItemIco}>
                         <Icon
                           color={
-                            url.includes('addusers') ? '#375EC0' : '#6A707F'
+                            url.includes('addusers') ? '#ffffff' : '#aeaeae'
                           }
                           icon="mdi:account-multiple-outline"
                           width="28"
@@ -169,8 +171,8 @@ export default function SideDrawer(props) {
                         <Icon
                           color={
                             url.includes('approvedesign')
-                              ? '#375EC0'
-                              : '#6A707F'
+                              ? '#ffffff'
+                              : '#aeaeae'
                           }
                           icon="mdi:tag-approve"
                           width="24"
@@ -191,8 +193,8 @@ export default function SideDrawer(props) {
                         <Icon
                           color={
                             url.includes('managepayments')
-                              ? '#375EC0'
-                              : '#6A707F'
+                              ? '#ffffff'
+                              : '#aeaeae'
                           }
                           icon="mdi:cash"
                           width="24"
@@ -215,7 +217,7 @@ export default function SideDrawer(props) {
                       <ListItemIcon sx={listItemIco}>
                         <Icon
                           icon="material-symbols:home-rounded"
-                          color={url === '' ? '#375EC0' : '#6A707F'}
+                          color={url === '' ? '#ffffff' : '#aeaeae'}
                           width="30"
                           height="30"
                         />
@@ -234,7 +236,7 @@ export default function SideDrawer(props) {
                         <Icon
                           icon="ion:create"
                           color={
-                            url.includes('adddesign') ? '#375EC0' : '#6A707F'
+                            url.includes('adddesign') ? '#ffffff' : '#aeaeae'
                           }
                           width="26"
                           height="26"
@@ -256,8 +258,8 @@ export default function SideDrawer(props) {
                           icon="material-symbols-light:grid-view"
                           color={
                             url.includes('posteddesigns')
-                              ? '#375EC0'
-                              : '#6A707F'
+                              ? '#ffffff'
+                              : '#aeaeae'
                           }
                           width="26"
                           height="26"
@@ -279,7 +281,7 @@ export default function SideDrawer(props) {
                       <ListItemIcon sx={listItemIco}>
                         <Icon
                           icon="material-symbols:home-rounded"
-                          color={url === '' ? '#375EC0' : '#6A707F'}
+                          color={url === '' ? '#ffffff' : '#aeaeae'}
                           width="26"
                           height="26"
                         />
@@ -298,7 +300,7 @@ export default function SideDrawer(props) {
                         <Icon
                           icon="bxs:cart"
                           color={
-                            url.includes('purchased') ? '#375EC0' : '#6A707F'
+                            url.includes('purchased') ? '#ffffff' : '#aeaeae'
                           }
                           width="27"
                           height="27"

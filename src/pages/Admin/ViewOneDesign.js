@@ -1,6 +1,8 @@
 import {React, useState, useEffect} from 'react'
 import SideDrawer from '../../components/sidebar/Sidebar'
 import { Grid, Typography, Paper, Button, Box, Link } from '@mui/material'
+import Carousel from 'react-material-ui-carousel'
+
 import {link} from '../../theme/CssMy'
 import {getOneDesign} from '../../services/adminServices'
 import {viewOneDesign} from '../../services/storeServices'
@@ -66,12 +68,24 @@ const ViewOneDesign = () => {
             </Grid>
             <Grid item xs={6} alignItems="center">
               <Paper sx={{ padding: 3, borderRadius: 3, minHeight: '100%' }}>
-                <img
+                {/* <img
                   src={design._image}
                   alt={design.title}
                   style={{ margin: 'auto' }}
                   width="100%"
-                />
+                /> */}
+                <Carousel
+                  autoPlay={true}
+                  swipe={true}
+                  indicators={false}
+                  cycleNavigation={true}
+                  interval={5000}
+                  animation="fade"
+                >
+                  {design.items.map((item, i) => (
+                    <Item key={i} item={item} i={i === 0 ? true : false} />
+                  ))}
+                </Carousel>
               </Paper>
             </Grid>
             <Grid item xs={6}>
@@ -97,6 +111,36 @@ const ViewOneDesign = () => {
         )}
       </Grid>
     </SideDrawer>
+  )
+}
+
+function Item(props) {
+  return (
+    <>
+      <Box
+        sx={{
+          // margin: 0,
+          // padding: 0,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        alignItems="center"
+        justify="center"
+        // backgroundColor="#cccccc"
+      >
+        {/* <CardMedia
+          component="img"
+          
+          // sx={{ height: '100vh' }}
+        /> */}
+        <img
+          src={props.item.img}
+          width="80%"
+          alt=""
+          style={{ marginLeft: 'auto', marginRight: 'auto', display: 'block' }}
+        />
+      </Box>
+    </>
   )
 }
 

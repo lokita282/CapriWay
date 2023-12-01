@@ -15,6 +15,7 @@ import {
 } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { useNavigate } from 'react-router'
+import Carousel from 'react-material-ui-carousel'
 import { link, btn_bank, df_jc_ac, circularprog } from '../../theme/CssMy'
 import { Icon } from '@iconify/react'
 import { buyDesign, paymentConfirmation, updateLikes } from '../../services/storeServices'
@@ -142,13 +143,13 @@ const PostedDesigns = () => {
                 <>
                   <Grid item xs={4}>
                     <Card
-                      sx={{ maxWidth: 345 }}
+                      sx={{ maxWidth: 345, height: 450 }}
                       onMouseOver={handleMouseOver}
                       onMouseOut={handleMouseOut}
                     >
                       {design.isPremium ? (
                         <CardMedia
-                          sx={{ height: 140 }}
+                          sx={{ height: 230 }}
                           image={design._image}
                           title={design.title}
                           style={{
@@ -158,13 +159,47 @@ const PostedDesigns = () => {
                             '-o-filter': 'blur(5px)',
                             '-ms-filter': 'blur(5px)',
                           }}
-                        />
+                        >
+                          <Carousel
+                            autoPlay={true}
+                            swipe={true}
+                            indicators={false}
+                            cycleNavigation={true}
+                            interval={5000}
+                            animation="fade"
+                          >
+                            {design.items.map((item, i) => (
+                              <Item
+                                key={i}
+                                item={item}
+                                i={i === 0 ? true : false}
+                              />
+                            ))}
+                          </Carousel>
+                        </CardMedia>
                       ) : (
                         <CardMedia
-                          sx={{ height: 140 }}
+                          sx={{ height: 230 }}
                           image={design._image}
                           title={design.title}
-                        />
+                        >
+                          <Carousel
+                            autoPlay={true}
+                            swipe={true}
+                            indicators={false}
+                            cycleNavigation={true}
+                            interval={5000}
+                            animation="fade"
+                          >
+                            {design.items.map((item, i) => (
+                              <Item
+                                key={i}
+                                item={item}
+                                i={i === 0 ? true : false}
+                              />
+                            ))}
+                          </Carousel>
+                        </CardMedia>
                       )}
                       <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
@@ -202,7 +237,7 @@ const PostedDesigns = () => {
                           </Grid>
                         </Grid>
                       </CardContent>
-                      {isHovered ? (
+                      {/* {isHovered ? (
                         <CardActions>
                           <Grid item xs={1}>
                             <IconButton
@@ -263,10 +298,13 @@ const PostedDesigns = () => {
                             </Button>
                           </Grid>
                         </CardActions>
-                      ) : (
+                      ) : ( */}
                         <CardActions>
                           <Grid item xs={1}>
-                            <IconButton aria-label="add to favorites">
+                            <IconButton
+                              aria-label="add to favorites"
+                              onClick={() => handleLike(design.design_id)}
+                            >
                               {design.status ? (
                                 <FavoriteIcon sx={{ color: '#E8425B' }} />
                               ) : (
@@ -284,10 +322,10 @@ const PostedDesigns = () => {
                               Rs. {design.price}
                             </Typography>
                           </Grid>
-                          <Grid item xs={4}>
+                          <Grid item xs={5} align="center">
                             {design.isPremium ? (
                               <Button
-                                sx={{ float: 'right', marginRight: '0.4em' }}
+                                sx={{ margin: '0.4em' }}
                                 variant="contained"
                                 onMouseEnter={() => {
                                   handleSetData(design)
@@ -300,7 +338,7 @@ const PostedDesigns = () => {
                               </Button>
                             ) : (
                               <Button
-                                sx={{ float: 'right', marginRight: '0.4em' }}
+                                sx={{  margin: '0.4em' }}
                                 variant="contained"
                               >
                                 <Link sx={link} href={design.asset}>
@@ -308,9 +346,21 @@ const PostedDesigns = () => {
                                 </Link>
                               </Button>
                             )}
+                            {/* <Grid item xs={5}> */}
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={() =>
+                                  navigate(`/design/${design.design_id}`)
+                                }
+                              >
+                                View
+                              </Button>
+                            {/* </Grid> */}
                           </Grid>
                         </CardActions>
-                      )}
+                      {/* ) */}
+                      {/* } */}
                     </Card>
                   </Grid>
                 </>
@@ -318,6 +368,31 @@ const PostedDesigns = () => {
             })
           : 'Loading...'}
       </Grid>
+    </>
+  )
+}
+
+function Item(props) {
+  return (
+    <>
+      <Box
+        sx={{
+          // margin: 0,
+          // padding: 0,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        alignItems="center"
+        justify="center"
+        backgroundColor="#cccccc"
+      >
+        {/* <CardMedia
+          component="img"
+          
+          // sx={{ height: '100vh' }}
+        /> */}
+        <img src={props.item.img} width="60%" alt="" style={{marginLeft: 'auto', marginRight: 'auto',  display: 'block'}} />
+      </Box>
     </>
   )
 }

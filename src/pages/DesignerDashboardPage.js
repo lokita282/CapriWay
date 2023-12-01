@@ -129,13 +129,14 @@ const DesignerDashboardPage = () => {
               </Paper>
             </Grid>
             <Grid item xs={2.4} md={2.4}>
-              <Paper style={styles.paperContainer} >
-                <img src={approve} width="80%" alt="chest" />
+              <Paper style={styles.paperContainer}>
+                <img src={approve} width="60%" alt="chest" />
                 <Typography
                   variant="h4"
                   color="initial"
                   style={styles.gradientText2}
                   align="center"
+                  sx={{ paddingTop: '0.5em' }}
                 >
                   <b>{data.total_approved} </b>
                 </Typography>
@@ -151,7 +152,7 @@ const DesignerDashboardPage = () => {
             </Grid>
             <Grid item xs={2.4} md={2.4}>
               <Paper style={styles.paperContainer}>
-                <img src={pending} width="80%" alt="chest" />
+                <img src={pending} width="77%" alt="chest" />
                 <Typography
                   variant="h4"
                   color="initial"
@@ -165,6 +166,7 @@ const DesignerDashboardPage = () => {
                   color="#aeaeae"
                   // style={styles.gradientText2}
                   align="center"
+                  sx={{ paddingBottom: '1em' }}
                 >
                   <b> Unapproved </b>
                 </Typography>
@@ -172,12 +174,13 @@ const DesignerDashboardPage = () => {
             </Grid>
             <Grid item xs={2.4} md={2.4}>
               <Paper style={styles.paperContainer}>
-                <img src={reject} width="80%" alt="chest" />
+                <img src={reject} width="60%" alt="chest" />
                 <Typography
                   variant="h4"
                   color="initial"
                   style={styles.gradientText2}
                   align="center"
+                  sx={{ paddingTop: '0.5em' }}
                 >
                   <b>{data.total_rejected} </b>
                 </Typography>
@@ -193,12 +196,13 @@ const DesignerDashboardPage = () => {
             </Grid>
             <Grid item xs={2.4} md={2.4}>
               <Paper style={styles.paperContainer}>
-                <img src={sold} width="80%" alt="chest" />
+                <img src={sold} width="60%" alt="chest" />
                 <Typography
                   variant="h4"
                   color="initial"
                   style={styles.gradientText2}
                   align="center"
+                  sx={{ paddingTop: '0.5em' }}
                 >
                   <b>{data.total_sold} </b>
                 </Typography>
@@ -214,7 +218,7 @@ const DesignerDashboardPage = () => {
             </Grid>
             <Grid item xs={2.4} md={2.4}>
               <Paper style={styles.paperContainer}>
-                <img src={unsold} width="80%" alt="chest" />
+                <img src={unsold} width="60%" alt="chest" />
                 <Typography
                   variant="h4"
                   color="initial"
