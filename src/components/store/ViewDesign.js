@@ -299,66 +299,79 @@ const PostedDesigns = () => {
                           </Grid>
                         </CardActions>
                       ) : ( */}
-                        <CardActions>
-                          <Grid item xs={1}>
-                            <IconButton
-                              aria-label="add to favorites"
-                              onClick={() => handleLike(design.design_id)}
-                            >
-                              {design.status ? (
-                                <FavoriteIcon sx={{ color: '#E8425B' }} />
-                              ) : (
-                                <FavoriteIcon />
-                              )}
-                            </IconButton>
-                          </Grid>
-                          <Grid item xs={1}>
-                            <Typography variant="body1" color="initial">
-                              {design.likes_count}
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={6}>
-                            <Typography variant="body1" color="initial">
-                              Rs. {design.price}
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={5} align="center">
-                            {design.isPremium ? (
-                              <Button
-                                sx={{ margin: '0.4em' }}
-                                variant="contained"
-                                onMouseEnter={() => {
-                                  handleSetData(design)
-                                }}
-                                onClick={() => {
-                                  displayRazorpay()
-                                }}
-                              >
-                                Buy
-                              </Button>
+                      <CardActions>
+                        <Grid item xs={1}>
+                          <IconButton
+                            aria-label="add to favorites"
+                            onClick={() => handleLike(design.design_id)}
+                          >
+                            {design.status ? (
+                              <FavoriteIcon sx={{ color: '#E8425B' }} />
                             ) : (
-                              <Button
-                                sx={{  margin: '0.4em' }}
-                                variant="contained"
-                              >
-                                <Link sx={link} href={design.asset}>
-                                  Download
-                                </Link>
-                              </Button>
+                              <FavoriteIcon />
                             )}
-                            {/* <Grid item xs={5}> */}
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={() =>
-                                  navigate(`/design/${design.design_id}`)
-                                }
-                              >
-                                View
-                              </Button>
-                            {/* </Grid> */}
-                          </Grid>
-                        </CardActions>
+                          </IconButton>
+                        </Grid>
+                        <Grid item xs={1}>
+                          <Typography variant="body1" color="initial">
+                            {design.likes_count}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Typography variant="body1" color="initial">
+                            Rs. {design.price}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={5} align="center">
+                          {design.isPremium ? (
+                            <Button
+                              sx={{ margin: '0.4em' }}
+                              variant="contained"
+                              onMouseEnter={() => {
+                                handleSetData(design)
+                              }}
+                              onClick={() => {
+                                displayRazorpay()
+                              }}
+                            >
+                              Buy
+                            </Button>
+                          ) : (
+                            <Button
+                              sx={{ margin: '0.4em' }}
+                              variant="contained"
+                            >
+                              <Link sx={link} href={design.asset}>
+                                Download
+                              </Link>
+                            </Button>
+                          )}
+                          {/* <Grid item xs={5}> */}
+                          {design.isPremium ? (
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              disabled
+                              onClick={() =>
+                                navigate(`/design/${design.design_id}`)
+                              }
+                            >
+                              View
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={() =>
+                                navigate(`/design/${design.design_id}`)
+                              }
+                            >
+                              View
+                            </Button>
+                          )}
+                          {/* </Grid> */}
+                        </Grid>
+                      </CardActions>
                       {/* ) */}
                       {/* } */}
                     </Card>
