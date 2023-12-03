@@ -6,7 +6,7 @@ export default axios.create({
   // baseURL: `https://sarthakbhan.pythonanywhere.com`,
 
   // development url
-  baseURL: `https://649a-2405-201-6-41fd-1854-edd6-954d-a719.ngrok-free.app`,
+  baseURL: `https://3c53-2405-201-6-41fd-b12f-289d-fcfa-2dae.ngrok-free.app`,
 
   headers: {
     'Content-type': 'application/json',

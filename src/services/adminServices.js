@@ -50,6 +50,14 @@ export const getDesignerUsers = () => {
   })
 }
 
+export const getStats = () => {
+  return httpcommon.get(`/marketplace/admin_stats/ `, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+    },
+  })
+}
+
 export const getAllDesigns = () => {
   return httpcommon.get(`/marketplace/admin_view`, {
     headers: {
