@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react'
+import Carousel from 'react-material-ui-carousel'
 import SideDrawer from '../../components/sidebar/Sidebar'
 import { postedDesigns } from '../../services/designerServices'
 import { Icon } from '@iconify/react'
@@ -102,10 +103,27 @@ const PostedDesigns = () => {
                       <Grid item xs={4}>
                         <Card sx={{ maxWidth: 345 }}>
                           <CardMedia
-                            sx={{ height: 200 }}
+                            sx={{ height: 230 }}
                             image={design._image}
-                            // title={design.title}
-                          />
+                            title={design.title}
+                          >
+                            <Carousel
+                              autoPlay={true}
+                              swipe={true}
+                              indicators={false}
+                              cycleNavigation={true}
+                              interval={5000}
+                              animation="fade"
+                            >
+                              {design.items.map((item, i) => (
+                                <Item
+                                  key={i}
+                                  item={item}
+                                  i={i === 0 ? true : false}
+                                />
+                              ))}
+                            </Carousel>
+                          </CardMedia>
                           <CardContent>
                             <Typography
                               gutterBottom
@@ -235,6 +253,36 @@ const PostedDesigns = () => {
           }): ('Loading...')} */}
       </Grid>
     </SideDrawer>
+  )
+}
+
+function Item(props) {
+  return (
+    <>
+      <Box
+        sx={{
+          // margin: 0,
+          // padding: 0,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        alignItems="center"
+        justify="center"
+        backgroundColor="#cccccc"
+      >
+        {/* <CardMedia
+          component="img"
+          
+          // sx={{ height: '100vh' }}
+        /> */}
+        <img
+          src={props.item.img}
+          width="60%"
+          alt=""
+          style={{ marginLeft: 'auto', marginRight: 'auto', display: 'block' }}
+        />
+      </Box>
+    </>
   )
 }
 

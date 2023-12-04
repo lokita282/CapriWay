@@ -87,7 +87,12 @@ const AddUserForm = () => {
     setLoad(true)
 
     const formdata = new FormData()
-    formdata.append('_image', image)
+    console.log(image[0])
+    // formdata.append('_image', image)
+    for (let i = 0; i < image.length; i++) {
+      formdata.append('_image', image[i])
+      console.log(image[i])
+    }
     formdata.append('assets', assets)  
     formdata.append('title', title)
     formdata.append('description', description)
