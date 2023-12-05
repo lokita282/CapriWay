@@ -107,6 +107,7 @@ const PostedDesigns = () => {
                             image={design._image}
                             title={design.title}
                           >
+                            {console.log(design)}
                             <Carousel
                               autoPlay={true}
                               swipe={true}
