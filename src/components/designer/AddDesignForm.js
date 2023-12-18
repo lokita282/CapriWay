@@ -102,16 +102,12 @@ const AddUserForm = () => {
     formdata.append('isPremium', checked)
 
     axios
-      .post(
-        'https://3236-2405-201-6-41fd-cc08-8d1-df7e-6741.ngrok-free.app/marketplace/upload-design/',
-        formdata,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
-          },
-        }
-      )
+      .post('https://3.6.47.71/marketplace/upload-design/', formdata, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem('capriwayToken')}`,
+        },
+      })
       .then((response) => {
         console.log('Upload successful', response.data)
         successHandler('Design uploaded successfully!')
